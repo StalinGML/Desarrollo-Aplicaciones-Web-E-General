@@ -1,27 +1,38 @@
-# Desarrollo de Aplicaciones Web - Semana 02
+# Desarrollo de Aplicaciones Web - Proyecto General
 
-## Datos del estudiante
+## Datos del estudiante  
 **Nombre:** Mendieta López Stalin Gabriel  
-**Tema Semana 02:** Herramientas y tecnologías esenciales: editores, navegadores y servidores locales  
-**Tarea:** Creación y publicación de una página web básica utilizando HTML y GitHub  
+**Asignatura:** Desarrollo de Aplicaciones Web  
+**Paralelo:** (E)  
 **Período académico:** 2026–2026  
 
 ## Descripción del trabajo
-Proyecto desarrollado en HTML como parte de la práctica inicial de desarrollo web.  
-La actividad consiste en crear una página web básica utilizando Visual Studio Code, aplicando la estructura fundamental de HTML y publicando el archivo en un repositorio de GitHub.  
-La página contiene encabezados principales y una breve descripción relacionada con un sistema de gestión de inventario.  
+Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, fue mejorándose hasta incluir nuevas secciones, contenido multimedia y una estructura más completa usando HTML5.  
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con su actividad.  
 
 ## Estructura del código  
-El proyecto incluye:  
-- Archivo index.html
-- Etiquetas HTML básicas
+El proyecto está compuesto por:  
+- Archivo principal `index.html`  
+- Carpeta de imágenes (`img`)  
+- Estructura en HTML5  
 - Encabezados `<h1>`, `<h2>` y `<h3>`  
-- Estilos básicos con CSS  
+- Menú de navegación  
+- Secciones de contenido  
+- Imágenes y video incrustado  
+- Información de contacto  
+- Estilos básicos aplicados con CSS en línea  
 
-## Funcionalidad de la página  
-- Funcionalidades de la página
-- Visualización de título principal
-- Descripción breve del proyecto
-- Identificación del estudiante
-- Diseño básico centrado
-- Personalización simple mediante CSS  
+## Avances del proyecto  
+
+### Semana 2  
+- Creación de la estructura inicial del documento HTML.
+- Uso de encabezados `<h1>`, `<h2>` y `<h3>`.
+- Definición del tema general del proyecto.
+
+### Semana 3  
+- Creación de un menú de navegación interno.
+- Desarrollo de las secciones Inicio, Quiénes Somos, Productos y Contacto.
+- Inserción de imágenes relacionadas con la empresa.
+- Incorporación de un video de YouTube sobre el proceso del acero inoxidable.
+- Uso de etiquetas semánticas como `header`, `nav`, `main`, `section`, `aside` y `footer`.
+- Mejora de la organización y presentación del contenido con CSS en línea.
