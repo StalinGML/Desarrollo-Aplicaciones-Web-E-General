@@ -1,14 +1,14 @@
 # Desarrollo de Aplicaciones Web - Proyecto General
 
-## Datos del estudiante  
-**Nombre:** Mendieta López Stalin Gabriel  
+## Datos de los estudiantes  
+**Nombres:** Mendieta López Stalin Gabriel - Quijije Coral Lilian Paulina  
 **Asignatura:** Desarrollo de Aplicaciones Web  
 **Paralelo:** (E)  
 **Período académico:** 2026–2026  
 
 ## Descripción del trabajo
 Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia y mejoras en diseño.  
-En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con la actividad de la empresa, además de mejoras en diseño mediante CSS3 y Bootstrap..  
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con la actividad de la empresa, además de mejoras en diseño mediante CSS3 y Bootstrap contacto y una funcionalidad dinámica de registro de solicitudes implementada con JavaScript.  
 
 ## Estructura del código  
 El proyecto está compuesto por:  
@@ -44,4 +44,14 @@ El proyecto está compuesto por:
 - Aplicación de **Bootstrap** para lograr un diseño responsivo y adaptable a dispositivos móviles.  
 - Mejora del diseño de botones, menús y tarjetas de contenido.  
 - Optimización de la experiencia de usuario (UX) y organización visual del sitio.  
-- Ajustes en la estructura para mejorar la accesibilidad y legibilidad del contenido.  
+- Ajustes en la estructura para mejorar la accesibilidad y legibilidad del contenido.
+
+### Semana 5  
+- Implementación de JavaScript  
+- Manipulación del DOM y eventos  
+- Uso de `addEventListener`, `submit` y `preventDefault()`  
+- Validación de formularios  
+- Creación dinámica de elementos con `createElement()`  
+- Eliminación de registros  
+- Contador de solicitudes  
+- Aplicación de diseño dinámico con Bootstrap  
