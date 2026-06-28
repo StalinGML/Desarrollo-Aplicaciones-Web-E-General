@@ -21,7 +21,7 @@ formulario.addEventListener("submit", function (event) {
         return;
     }
 
-    mensaje.textContent = "Solicitud registrada correctamente.";
+    mensaje.textContent = "Solicitud registrada con éxito.";
     mensaje.className = "text-success mt-3 text-center fw-bold";
 
     const tarjeta = document.createElement("div");
