@@ -7,8 +7,8 @@
 **Período académico:** 2026–2026  
 
 ## Descripción del trabajo
-Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia y mejoras en diseño.  
-En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con la actividad de la empresa, además de mejoras en diseño mediante CSS3 y Bootstrap contacto y una funcionalidad dinámica de registro de solicitudes implementada con JavaScript.  
+Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia y funcionalidades dinámicas mediante JavaScript.  
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con la actividad de la empresa, además de mejoras en diseño mediante CSS3 y Bootstrap contacto y un sistema dinámico de registro de solicitudes con validaciones en tiempo real.  
 
 ## Estructura del código  
 El proyecto está compuesto por:  
@@ -55,3 +55,12 @@ El proyecto está compuesto por:
 - Eliminación de registros  
 - Contador de solicitudes  
 - Aplicación de diseño dinámico con Bootstrap  
+
+### Semana 6  
+- Implementación de validaciones dinámicas en formularios con JavaScript.  
+- Validación en tiempo real usando eventos `input`, `blur`, `change` y `submit`.  
+- Verificación de campos obligatorios y longitud mínima.  
+- Validación de formato del nombre (solo letras y espacios).  
+- Mensajes de error y éxito debajo de cada campo.  
+- Aplicación de clases Bootstrap como `is-valid`, `is-invalid`, `alert-success` y `alert-danger`.  
+- Mejora de la experiencia de usuario mediante retroalimentación visual inmediata.
