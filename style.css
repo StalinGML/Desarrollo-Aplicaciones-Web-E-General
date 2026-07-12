@@ -34,8 +34,42 @@ footer {
     margin-top: 20px;
 }
 
-/* Media Query obligatoria */
+/* Tarjetas de solicitudes */
+#listaSolicitudes .card {
+    border-left: 5px solid #0d6efd;
+}
+
+/* ==========================
+   SEMANA 7
+   Contenido dinámico
+========================== */
+
+#contenedorProductos .card {
+    height: 100%;
+    border: none;
+    border-left: 5px solid #198754;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+#contenedorProductos .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+}
+
+#mensajeProductos {
+    margin-bottom: 20px;
+}
+
+/* Comentario visual para la estructura reutilizable */
+.seccion-plantilla {
+    border-top: 3px solid #198754;
+    padding-top: 15px;
+}
+
+/* Responsive */
+
 @media (max-width: 768px) {
+
     h1 {
         font-size: 28px;
     }
@@ -47,21 +81,9 @@ footer {
     .hero {
         padding: 30px 20px !important;
     }
-}
-#listaSolicitudes .card { 
-    border-left: 5px solid #0d6efd; }
 
-    .is-valid {
-    border: 2px solid #198754 !important;
-}
+    #contenedorProductos .card {
+        margin-bottom: 15px;
+    }
 
-.is-invalid {
-    border: 2px solid #dc3545 !important;
-}
-
-#errorNombre,
-#errorProducto,
-#errorCategoria {
-    font-size: 14px;
-    min-height: 20px;
 }
