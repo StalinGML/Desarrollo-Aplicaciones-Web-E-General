@@ -1,5 +1,5 @@
 /* DATOS DINÁMICOS 
-   Preparado para Flask */
+   Preparado para integrar con Flask */
 
 const productos = [
     {
@@ -87,6 +87,7 @@ const errorCategoria = document.getElementById("errorCategoria");
 const mensaje = document.getElementById("mensaje");
 const listaSolicitudes = document.getElementById("listaSolicitudes");
 const contador = document.getElementById("contador");
+const spinnerCarga = document.getElementById("spinnerCarga");
 
 const regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
@@ -210,7 +211,7 @@ function validarCategoria() {
 
 }
 
-/* EVENTOS */
+/* ASIGNACIÓN DE EVENTOS */
 
 nombreCliente.addEventListener("input", validarNombre);
 nombreCliente.addEventListener("blur", validarNombre);
@@ -221,7 +222,7 @@ productoSolicitud.addEventListener("blur", validarProducto);
 tipoSolicitud.addEventListener("change", validarCategoria);
 tipoSolicitud.addEventListener("blur", validarCategoria);
 
-/* REGISTRO */
+/* REGISTRO DE SOLICITUD */
 
 formulario.addEventListener("submit", function(event){
 
@@ -240,58 +241,52 @@ formulario.addEventListener("submit", function(event){
 
     }
 
-    mensaje.className = "alert alert-success mt-3";
-    mensaje.textContent = "Solicitud registrada con éxito.";
+    spinnerCarga.classList.remove("d-none");
+    mensaje.innerHTML = "";
+    setTimeout(function () {
+        spinnerCarga.classList.add("d-none");
 
-    const tarjeta = document.createElement("div");
+        mensaje.className = "alert alert-success mt-3";
+        mensaje.textContent = "Solicitud registrada con éxito.";
 
-    tarjeta.className = "card shadow p-3 mb-3";
+        const tarjeta = document.createElement("div");
 
-    tarjeta.innerHTML = `
+        tarjeta.className = "card shadow p-3 mb-3";
+        tarjeta.innerHTML = `
 
-        <p>
+            <p>
+                <strong>Cliente:</strong> ${nombreCliente.value}<br>
+                <strong>Producto:</strong> ${productoSolicitud.value}<br>
+                <strong>Categoría:</strong> ${tipoSolicitud.value}
+            </p>
+        `;
+        const botonEliminar = document.createElement("button");
 
-            <strong>Cliente:</strong> ${nombreCliente.value}<br>
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.className = "btn btn-danger btn-sm";
+        botonEliminar.addEventListener("click", function () {
+            tarjeta.remove();
 
-            <strong>Producto:</strong> ${productoSolicitud.value}<br>
+            totalSolicitudes--;
+            contador.textContent = totalSolicitudes;
 
-            <strong>Categoría:</strong> ${tipoSolicitud.value}
+        });
 
-        </p>
-
-    `;
-
-    const botonEliminar = document.createElement("button");
-
-    botonEliminar.textContent = "Eliminar";
-    botonEliminar.className = "btn btn-danger btn-sm";
-
-    botonEliminar.addEventListener("click", function(){
-
-        tarjeta.remove();
-
-        totalSolicitudes--;
-
+        tarjeta.appendChild(botonEliminar);
+        listaSolicitudes.appendChild(tarjeta);
+        totalSolicitudes++;
         contador.textContent = totalSolicitudes;
 
-    });
+        formulario.reset();
 
-    tarjeta.appendChild(botonEliminar);
+        nombreCliente.classList.remove("is-valid");
+        productoSolicitud.classList.remove("is-valid");
+        tipoSolicitud.classList.remove("is-valid");
 
-    listaSolicitudes.appendChild(tarjeta);
+        errorNombre.textContent = "";
+        errorProducto.textContent = "";
+        errorCategoria.textContent = "";
 
-    totalSolicitudes++;
-
-    contador.textContent = totalSolicitudes;
-
-    formulario.reset();
-
-    nombreCliente.classList.remove("is-valid");
-    productoSolicitud.classList.remove("is-valid");
-    tipoSolicitud.classList.remove("is-valid");
-
-    errorNombre.textContent = "";
-    errorProducto.textContent = "";
-    errorCategoria.textContent = "";
+    }, 1500);
 
 });
