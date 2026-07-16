@@ -8,7 +8,7 @@
 
 ## Descripción del trabajo
 Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia y funcionalidades dinámicas mediante JavaScript.  
-En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con la actividad de la empresa, además de mejoras en diseño mediante CSS3 y Bootstrap contacto y un sistema dinámico de registro de solicitudes con validaciones en tiempo real.  
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con su actividad. Además, incorpora un sistema dinámico de registro de solicitudes con validaciones en tiempo real, renderización dinámica de contenido mediante JavaScript y una estructura organizada por secciones reutilizables, preparada para una futura integración con Flask y bases de datos.  
 
 ## Estructura del código  
 El proyecto está compuesto por:  
@@ -22,6 +22,9 @@ El proyecto está compuesto por:
 - Formulario de contacto  
 - Estilos con CSS3  
 - Integración de Bootstrap para diseño responsivo  
+- Validaciones dinámicas con JavaScript   
+- Renderización dinámica de contenido mediante arreglos y objetos  
+- Organización preparada para futuras plantillas de Flask  
 
 ## Avances del proyecto  
 
@@ -64,3 +67,12 @@ El proyecto está compuesto por:
 - Mensajes de error y éxito debajo de cada campo.  
 - Aplicación de clases Bootstrap como `is-valid`, `is-invalid`, `alert-success` y `alert-danger`.  
 - Mejora de la experiencia de usuario mediante retroalimentación visual inmediata.
+
+### Semana 7
+- Reorganización de la interfaz con una estructura preparada para futuras plantillas de Flask.  
+- Identificación de secciones reutilizables mediante comentarios en el HTML.  
+- Implementación de contenido dinámico utilizando arreglos y objetos en JavaScript.  
+- Renderización dinámica de productos y solicitudes mediante funciones reutilizables.  
+- Uso de estructuras repetitivas y condicionales para mostrar la información.  
+- Conservación de las validaciones dinámicas implementadas en la Semana 6.  
+- Organización del proyecto para facilitar su futura integración con Flask y bases de datos.  

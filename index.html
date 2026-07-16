@@ -15,6 +15,10 @@
 
 <body>
 
+    <!-- ========================================= -->
+    <!-- FUTURA PLANTILLA FLASK: base.html -->
+    <!-- ========================================= -->
+
     <!-- HEADER -->
     <header class="header-custom text-center py-4 shadow">
         <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
@@ -22,46 +26,75 @@
             <h1 class="m-0">IMPORDYCOM S.A.</h1>
         </div>
 
-        <h2 class="mt-3">Importadora y distribuidora de materiales de acero inoxidable</h2>
+        <h2 class="mt-3">
+            Importadora y distribuidora de materiales de acero inoxidable
+        </h2>
+
         <h4>Desarrollado por: Stalin Mendieta & Lilian Quijije</h4>
     </header>
+
+    <!-- ========================================= -->
+    <!-- FUTURA PLANTILLA FLASK: navbar -->
+    <!-- ========================================= -->
 
     <!-- NAV -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">IMPORDYCOM S.A.</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <a class="navbar-brand" href="#">
+                IMPORDYCOM S.A.
+            </a>
+
+            <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu">
+
                 <span class="navbar-toggler-icon"></span>
+
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
+
                 <ul class="navbar-nav ms-auto">
+
                     <li class="nav-item">
                         <a class="nav-link" href="#inicio">Inicio</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#quienes">Quiénes Somos</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#productos">Productos</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#cotizacion">Cotizaciones</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#contacto">Contacto</a>
                     </li>
+
                 </ul>
+
             </div>
+
         </div>
     </nav>
 
-    <!-- MAIN -->
+    <!-- ========================================= -->
+    <!-- FUTURA PLANTILLA FLASK -->
+    <!-- Bloque de contenido principal -->
+    <!-- ========================================= -->
+
     <main class="container my-4">
 
         <!-- INICIO -->
         <section id="inicio" class="hero text-white text-center p-5 rounded shadow">
+
             <h2>Inicio</h2>
 
             <p>
@@ -74,166 +107,168 @@
             </p>
 
             <p>
-                Nos enfocamos en brindar un servicio eficiente, confiable y orientado
-                a satisfacer las necesidades de cada cliente, contribuyendo al desarrollo
-                de sus proyectos.
+                Nos enfocamos en brindar un servicio eficiente, confiable y
+                orientado a satisfacer las necesidades de cada cliente,
+                contribuyendo al desarrollo de sus proyectos.
             </p>
 
-            <a href="#contacto" class="btn btn-light mt-3">Solicitar Información</a>
+            <a href="#contacto" class="btn btn-light mt-3">
+                Solicitar Información
+            </a>
+
         </section>
 
-        <!-- QUIENES SOMOS -->
+        <!-- QUIÉNES SOMOS -->
         <section id="quienes" class="my-5">
+
             <div class="row align-items-center">
+
                 <div class="col-lg-6">
+
                     <h2>Quiénes Somos</h2>
 
                     <p>
-                        IMPORDYCOM S.A. es una empresa ecuatoriana especializada en la
-                        importación, comercialización y distribución de materiales de acero inoxidable,
-                        ofreciendo soluciones para los sectores industrial, comercial y de construcción.
-                        La empresa se ha consolidado gracias a su compromiso con la calidad, la responsabilidad
-                        y la atención personalizada a sus clientes.
+                        IMPORDYCOM S.A. es una empresa ecuatoriana especializada
+                        en la importación, comercialización y distribución de
+                        materiales de acero inoxidable, ofreciendo soluciones
+                        para los sectores industrial, comercial y de construcción.
+                        La empresa se ha consolidado gracias a su compromiso con
+                        la calidad, la responsabilidad y la atención personalizada
+                        a sus clientes.
                     </p>
 
                     <p>
-                        Nuestro catálogo incluye productos como tubos, planchas, barras,
-                        perfiles y accesorios metálicos que cumplen con estándares de alta
-                        resistencia y durabilidad.
+                        Nuestro catálogo incluye productos como tubos,
+                        planchas, barras, perfiles y accesorios metálicos
+                        que cumplen con estándares de alta resistencia y
+                        durabilidad.
                     </p>
 
                     <p>
-                        Además, contamos con un equipo de trabajo capacitado que garantiza un proceso eficiente
-                        desde la importación hasta la entrega del producto final. Buscamos constantemente mejorar
-                        nuestros procesos logísticos y de atención al cliente para asegurar la satisfacción total.
-                        IMPORDYCOM S.A. mantiene una visión de crecimiento sostenible basada en la confianza,
-                        innovación y compromiso con el mercado ecuatoriano.
+                        Además, contamos con un equipo de trabajo capacitado
+                        que garantiza un proceso eficiente desde la importación
+                        hasta la entrega del producto final. Buscamos
+                        constantemente mejorar nuestros procesos logísticos
+                        y de atención al cliente para asegurar la satisfacción
+                        total. IMPORDYCOM S.A. mantiene una visión de crecimiento
+                        sostenible basada en la confianza, innovación y compromiso
+                        con el mercado ecuatoriano.
                     </p>
+
                 </div>
 
                 <div class="col-lg-6 text-center">
-                    <img src="img/bodega.png"
+
+                    <img
+                        src="img/bodega.png"
                         alt="Bodega de acero inoxidable IMPORDYCOM"
                         class="img-fluid rounded shadow">
-                </div>
-            </div>
-        </section>
 
-        <!-- PRODUCTOS -->
+                </div>
+
+            </div>
+
+        </section>
+                <!-- CONTENIDO DINÁMICO (preparado para Flask) -->
         <section id="productos" class="my-5">
             <h2 class="text-center mb-4">Productos</h2>
 
-            <div class="row">
+            <div id="contenedorProductos" class="row">
+                <!-- Las tarjetas de productos serán renderizadas dinámicamente con JavaScript -->
+            </div>
 
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Tubos</h5>
-                            <p class="card-text">
-                                Tubos de acero inoxidable de alta resistencia para aplicaciones industriales.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Planchas</h5>
-                            <p class="card-text">
-                                Planchas resistentes para construcción y fabricación metálica.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Perfiles</h5>
-                            <p class="card-text">
-                                Perfiles de acero inoxidable con gran resistencia estructural.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Paneles Estampados</h5>
-                            <p class="card-text">
-                                Paneles con acabados decorativos y funcionales para distintos proyectos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Accesorios</h5>
-                            <p class="card-text">
-                                Accesorios y complementos en acero inoxidable de alta durabilidad.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+            <div id="mensajeProductos" class="text-center mt-4">
+                <!-- Aquí JavaScript mostrará un mensaje si no existen productos -->
             </div>
         </section>
 
         <!-- COTIZACIONES -->
         <section id="cotizacion" class="my-5">
             <h2 class="text-center mb-4">Registro de Solicitudes de Cotización</h2>
+
             <div class="row">
+
                 <div class="col-lg-5">
+
                     <form id="formSolicitud">
 
-                        <input type="text" id="nombreCliente" class="form-control mb-2"
+                        <input
+                            type="text"
+                            id="nombreCliente"
+                            class="form-control mb-1"
                             placeholder="Nombre del cliente">
-                        <div id="errorNombre" class="small mb-2"></div>
 
-                        <input type="text" id="productoSolicitud" class="form-control mb-2"
+                        <small id="errorNombre" class="d-block mb-3"></small>
+
+                        <input
+                            type="text"
+                            id="productoSolicitud"
+                            class="form-control mb-1"
                             placeholder="Producto solicitado">
-                        <div id="errorProducto" class="small mb-2"></div>
 
-                        <select id="tipoSolicitud" class="form-select mb-2">
+                        <small id="errorProducto" class="d-block mb-3"></small>
+
+                        <select
+                            id="tipoSolicitud"
+                            class="form-select mb-1">
+
                             <option value="">Seleccione una categoría</option>
                             <option>Industrial</option>
                             <option>Comercial</option>
                             <option>Construcción</option>
-                        </select>
-                        <div id="errorCategoria" class="small mb-3"></div>
 
-                        <button type="submit" class="btn btn-success w-100">
+                        </select>
+
+                        <small id="errorCategoria" class="d-block mb-3"></small>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100">
+
                             Registrar Solicitud
+
                         </button>
 
-                        <div id="mensaje" class="mt-3"></div>
+                        <div
+                            id="mensaje"
+                            class="mt-3">
+                        </div>
+
                     </form>
+
                 </div>
 
                 <div class="col-lg-7">
-                    <h4>Total de solicitudes: <span id="contador">0</span></h4>
-                    <div id="listaSolicitudes"></div>
+
+                    <h4>
+                        Total de solicitudes:
+                        <span id="contador">0</span>
+                    </h4>
+
+                    <div id="listaSolicitudes">
+                        <!-- JavaScript renderiza aquí las solicitudes -->
+                    </div>
+
                 </div>
+
             </div>
+
         </section>
-        
-        <!-- VIDEO -->
+
+        <!-- FIN CONTENIDO DINÁMICO -->
+                 <!-- VIDEO -->
         <section class="my-5">
             <h2 class="text-center mb-4">Proceso de fabricación del acero inoxidable</h2>
-            
+
             <div class="d-flex justify-content-center mb-4">
                 <div class="ratio ratio-16x9 shadow rounded" style="max-width: 800px; width: 100%;">
                     <iframe
-                    src="https://www.youtube.com/embed/L6ofyfKvNYw"
-                    title="Video sobre acero inoxidable"
-                    allowfullscreen>
-                </iframe>
+                        src="https://www.youtube.com/embed/L6ofyfKvNYw"
+                        title="Video sobre acero inoxidable"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
-        </div>      
 
             <p class="mt-3">
                 Este video muestra el proceso industrial mediante el cual se fabrica el acero inoxidable,
@@ -248,56 +283,105 @@
             <h2 class="text-center mb-4">Contacto</h2>
 
             <div class="row">
+
                 <div class="col-lg-6">
+
                     <p><strong>Correo:</strong> ventas1@impordycom.com</p>
                     <p><strong>Teléfono:</strong> 0994292304</p>
                     <p><strong>Dirección:</strong> Kennedy Norte, Guayaquil - Ecuador</p>
 
                     <div class="mt-3">
                         <a href="mailto:ventas1@impordycom.com" class="btn btn-primary m-1">Correo</a>
-                        <a href="https://www.facebook.com/" target="_blank" class="btn btn-outline-primary m-1">Facebook</a>
-                        <a href="https://www.instagram.com/" target="_blank" class="btn btn-outline-danger m-1">Instagram</a>
+
+                        <a href="https://www.facebook.com/profile.php?id=100067472088809" target="_blank"
+                            class="btn btn-outline-primary m-1">
+                            Facebook
+                        </a>
+
+                        <a href="https://www.instagram.com/impordycom/" target="_blank"
+                            class="btn btn-outline-danger m-1">
+                            Instagram
+                        </a>
                     </div>
+
                 </div>
 
                 <div class="col-lg-6">
+
                     <form>
-                        <input type="text" class="form-control mb-3" placeholder="Nombre">
-                        <input type="email" class="form-control mb-3" placeholder="Correo electrónico">
-                        <input type="text" class="form-control mb-3" placeholder="Asunto">
-                        <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
-                        <button class="btn btn-success">Enviar</button>
+
+                        <input
+                            type="text"
+                            class="form-control mb-3"
+                            placeholder="Nombre">
+
+                        <input
+                            type="email"
+                            class="form-control mb-3"
+                            placeholder="Correo electrónico">
+
+                        <input
+                            type="text"
+                            class="form-control mb-3"
+                            placeholder="Asunto">
+
+                        <textarea
+                            class="form-control mb-3"
+                            rows="5"
+                            placeholder="Mensaje"></textarea>
+
+                        <button class="btn btn-success">
+                            Enviar
+                        </button>
+
                     </form>
+
                 </div>
+
             </div>
+
         </section>
 
     </main>
+    <!-- FIN DEL CONTENIDO PRINCIPAL -->
 
     <!-- ASIDE -->
     <aside class="container bg-light p-4 text-center rounded shadow mb-4">
+
         <h2>Información adicional</h2>
+
         <p>
             Disponibilidad de materiales de acero inoxidable para proyectos
             comerciales, industriales y de construcción.
         </p>
-        <p>Atención a pedidos industriales y mayoristas en Guayaquil.</p>
+
+        <p>
+            Atención a pedidos industriales y mayoristas en Guayaquil.
+        </p>
+
         <h3>Horarios de Atención</h3>
+
         <p>Lunes a Viernes: 08h30 - 17h30</p>
+
     </aside>
 
     <!-- FOOTER -->
     <footer class="text-center bg-dark text-white p-3">
+
         <p class="m-0">
             Elaborado por: Stalin Mendieta & Lilian Quijije |
             Desarrollo de Aplicaciones Web |
             2026
         </p>
+
     </footer>
 
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript del proyecto -->
     <script src="script.js"></script>
 
 </body>
+
 </html>
-        
