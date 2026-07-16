@@ -12,7 +12,9 @@ En su versión actual, el proyecto presenta una página web institucional para I
 
 ## Estructura del código  
 El proyecto está compuesto por:  
-- Archivo principal `index.html`  
+- Archivo principal `index.html`
+- Archivo JavaScript `script.js`  
+- Hoja de estilos `style.css`  
 - Carpeta de imágenes (`img`)  
 - Estructura en HTML5  
 - Encabezados `<h1>`, `<h2>` y `<h3>`  
@@ -22,6 +24,7 @@ El proyecto está compuesto por:
 - Formulario de contacto  
 - Estilos con CSS3  
 - Integración de Bootstrap para diseño responsivo  
+- Componentes Bootstrap (Navbar, Cards, Modal, Spinner y Formularios)  
 - Validaciones dinámicas con JavaScript   
 - Renderización dinámica de contenido mediante arreglos y objetos  
 - Organización preparada para futuras plantillas de Flask  
@@ -75,4 +78,11 @@ El proyecto está compuesto por:
 - Renderización dinámica de productos y solicitudes mediante funciones reutilizables.  
 - Uso de estructuras repetitivas y condicionales para mostrar la información.  
 - Conservación de las validaciones dinámicas implementadas en la Semana 6.  
-- Organización del proyecto para facilitar su futura integración con Flask y bases de datos.  
+- Organización del proyecto para facilitar su futura integración con Flask y bases de datos.
+
+### Semana 8
+- Integración de componentes interactivos de Bootstrap, como Modal y Spinner.  
+- Implementación de un indicador de carga durante el registro de solicitudes.  
+- Mejora del diseño del formulario mediante `form-control`, `form-select` y el sistema Grid de Bootstrap.  
+- Optimización de la interfaz utilizando clases utilitarias y componentes responsivos de Bootstrap.  
+- Incorporación de una ventana Modal para mostrar información adicional de la empresa.  
