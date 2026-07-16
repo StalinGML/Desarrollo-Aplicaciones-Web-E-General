@@ -1,27 +1,107 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
+    background: #f8f9fa;
+    color: #212529;
 }
+
+/* ==========================
+   HEADER
+========================== */
 
 .header-custom {
     background: linear-gradient(135deg, #f2f2f2, #c0c0c0, #8f8f8f);
 }
 
+.header-custom h1 {
+    font-weight: bold;
+}
+
+.header-custom h2 {
+    font-size: 1.4rem;
+    color: #343a40;
+}
+
+.header-custom h4 {
+    color: #495057;
+    font-size: 1rem;
+}
+
+/* ==========================
+   NAVBAR
+========================== */
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+}
+
+/* ==========================
+   SECCIONES
+========================== */
+
+section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+/* ==========================
+   HERO
+========================== */
+
 .hero {
     background: linear-gradient(135deg, #4b4b4b, #1f1f1f, #ff7a00);
 }
 
-section {
-    margin-bottom: 40px;
+.hero h2 {
+    font-weight: bold;
 }
 
+.hero p {
+    font-size: 1.05rem;
+}
+
+/* ==========================
+   TARJETAS
+========================== */
+
 .card {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-8px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
+
+/* Tarjetas de productos */
+
+#contenedorProductos .card {
+    height: 100%;
+    border: none;
+    border-left: 5px solid #198754;
+    border-radius: 12px;
+}
+
+/* Tarjetas de solicitudes */
+
+#listaSolicitudes .card {
+    border-left: 5px solid #0d6efd;
+    border-radius: 12px;
+}
+
+/* ==========================
+   FORMULARIOS
+========================== */
 
 form {
     background: white;
@@ -30,43 +110,58 @@ form {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
 }
 
-footer {
-    margin-top: 20px;
-}
-
-/* Tarjetas de solicitudes */
-#listaSolicitudes .card {
-    border-left: 5px solid #0d6efd;
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 .2rem rgba(25,135,84,.25);
 }
 
 /* ==========================
-   SEMANA 7
-   Contenido dinámico
+   BOTONES
 ========================== */
 
-#contenedorProductos .card {
-    height: 100%;
-    border: none;
-    border-left: 5px solid #198754;
-    transition: transform .3s ease, box-shadow .3s ease;
+.btn {
+    transition: all 0.3s ease;
 }
 
-#contenedorProductos .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+.btn:hover {
+    transform: scale(1.03);
 }
+
+/* ==========================
+   CONTENIDO DINÁMICO
+========================== */
 
 #mensajeProductos {
     margin-bottom: 20px;
 }
 
-/* Comentario visual para la estructura reutilizable */
+/* Estilo para secciones reutilizables */
+
 .seccion-plantilla {
     border-top: 3px solid #198754;
     padding-top: 15px;
 }
 
-/* Responsive */
+/* ==========================
+   ASIDE
+========================== */
+
+aside {
+    border-radius: 12px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
 
 @media (max-width: 768px) {
 
@@ -75,7 +170,7 @@ footer {
     }
 
     h2 {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     .hero {
@@ -84,6 +179,10 @@ footer {
 
     #contenedorProductos .card {
         margin-bottom: 15px;
+    }
+
+    section {
+        padding: 20px;
     }
 
 }
