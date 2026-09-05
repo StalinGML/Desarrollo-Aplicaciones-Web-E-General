@@ -1,151 +1,170 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facturación - IMPORDYCOM S.A.</title>
+{% block title %}
+Facturación - IMPORDYCOM S.A.
+{% endblock %}
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block content %}
 
-    <!-- CSS del proyecto -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+<section class="my-5">
 
-<body>
+    <h2 class="text-center mb-4">
+        Gestión de Facturación
+    </h2>
 
-    <!-- HEADER -->
-    <header class="header-custom text-center py-4 shadow">
+    <!-- FORMULARIO -->
+    <div class="row justify-content-center mb-5">
 
-        <h1>IMPORDYCOM S.A.</h1>
+        <div class="col-lg-7">
 
-        <h2 class="mt-3">
-            Gestión de Facturación
-        </h2>
+            <form class="shadow">
 
-    </header>
+                <h3 class="text-center mb-4">
+                    Registro de Facturación
+                </h3>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-dark bg-dark">
+                <div class="mb-3">
 
-        <div class="container">
+                    <label for="cliente" class="form-label">
+                        Cliente
+                    </label>
 
-            <a class="navbar-brand" href="/">
-                IMPORDYCOM S.A.
-            </a>
-
-            <a class="btn btn-outline-light" href="/">
-                Volver al inicio
-            </a>
-
-        </div>
-
-    </nav>
-
-    <!-- CONTENIDO -->
-    <main class="container my-5">
-
-        <section>
-
-            <h2 class="text-center mb-4">
-                Registro de Facturación
-            </h2>
-
-            <div class="row justify-content-center">
-
-                <div class="col-lg-7">
-
-                    <form class="shadow">
-
-                        <div class="mb-3">
-
-                            <label for="cliente" class="form-label">
-                                Cliente
-                            </label>
-
-                            <input
-                                type="text"
-                                id="cliente"
-                                class="form-control"
-                                placeholder="Ingrese el nombre del cliente">
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="producto" class="form-label">
-                                Producto
-                            </label>
-
-                            <input
-                                type="text"
-                                id="producto"
-                                class="form-control"
-                                placeholder="Ingrese el producto">
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="cantidad" class="form-label">
-                                Cantidad
-                            </label>
-
-                            <input
-                                type="number"
-                                id="cantidad"
-                                class="form-control"
-                                min="1"
-                                placeholder="Ingrese la cantidad">
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="precio" class="form-label">
-                                Precio unitario
-                            </label>
-
-                            <input
-                                type="number"
-                                id="precio"
-                                class="form-control"
-                                min="0"
-                                step="0.01"
-                                placeholder="Ingrese el precio">
-
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="btn btn-success w-100">
-
-                            Registrar Factura
-
-                        </button>
-
-                    </form>
+                    <input
+                        type="text"
+                        id="cliente"
+                        class="form-control"
+                        placeholder="Ingrese el nombre del cliente">
 
                 </div>
 
+                <div class="mb-3">
+
+                    <label for="producto" class="form-label">
+                        Producto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="producto"
+                        class="form-control"
+                        placeholder="Ingrese el producto">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="cantidad" class="form-label">
+                        Cantidad
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        class="form-control"
+                        min="1"
+                        placeholder="Ingrese la cantidad">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="precio" class="form-label">
+                        Precio unitario
+                    </label>
+
+                    <input
+                        type="number"
+                        id="precio"
+                        class="form-control"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ingrese el precio">
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100">
+
+                    Registrar Factura
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- FACTURAS DINÁMICAS -->
+    <div class="seccion-plantilla">
+
+        <h3 class="text-center mb-4">
+            Facturas registradas
+        </h3>
+
+        {% if facturas %}
+
+            <div class="row">
+
+                {% for factura in facturas %}
+
+                    <div class="col-md-6 col-lg-4 mb-3">
+
+                        <div class="card h-100 shadow">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    Factura #{{ loop.index }}
+                                </h5>
+
+                                <p class="card-text mb-1">
+                                    <strong>Cliente:</strong>
+                                    {{ factura.cliente }}
+                                </p>
+
+                                <p class="card-text mb-1">
+                                    <strong>Producto:</strong>
+                                    {{ factura.producto }}
+                                </p>
+
+                                <p class="card-text mb-1">
+                                    <strong>Cantidad:</strong>
+                                    {{ factura.cantidad }}
+                                </p>
+
+                                <p class="card-text mb-1">
+                                    <strong>Precio unitario:</strong>
+                                    ${{ "%.2f"|format(factura.precio) }}
+                                </p>
+
+                                <p class="card-text">
+                                    <strong>Total:</strong>
+                                    ${{ "%.2f"|format(factura.total) }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
             </div>
 
-        </section>
+        {% else %}
 
-    </main>
+            <div class="alert alert-info text-center">
+                No existen facturas registradas.
+            </div>
 
-    <!-- FOOTER -->
-    <footer class="text-center bg-dark text-white p-3">
+        {% endif %}
 
-        <p class="m-0">
-            Elaborado por: Stalin Mendieta & Lilian Quijije |
-            Desarrollo de Aplicaciones Web |
-            2026
-        </p>
+    </div>
 
-    </footer>
+</section>
 
-</body>
-
-</html>
+{% endblock %}

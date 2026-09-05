@@ -161,7 +161,7 @@ IMPORDYCOM S.A.
             <form
                 id="formSolicitud"
                 class="card shadow p-4"
-                action="/cotizar"
+                action="{{ url_for('cotizar') }}"
                 method="POST">
 
                 <div class="row">
@@ -300,11 +300,49 @@ IMPORDYCOM S.A.
 
             <h4>
                 Total de solicitudes:
-                <span id="contador">0</span>
+                <span id="contador">{{ solicitudes|length }}</span>
             </h4>
 
             <div id="listaSolicitudes">
-                <!-- JavaScript -->
+
+                {% if solicitudes %}
+
+                    {% for solicitud in solicitudes %}
+
+                        <div class="card shadow p-3 mb-3">
+
+                            <p class="mb-2">
+                                <strong>Cliente:</strong> {{ solicitud.nombre }}<br>
+                                <strong>Producto:</strong> {{ solicitud.producto }}<br>
+                                <strong>Categoría:</strong> {{ solicitud.categoria }}
+                            </p>
+
+                            <form
+                                action="{{ url_for('eliminar', indice=loop.index0) }}"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger btn-sm">
+
+                                    Eliminar
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="alert alert-info">
+                        No existen solicitudes de cotización registradas.
+                    </div>
+
+                {% endif %}
+
             </div>
 
         </div>

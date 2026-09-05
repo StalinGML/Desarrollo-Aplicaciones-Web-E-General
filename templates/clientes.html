@@ -1,134 +1,138 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes - IMPORDYCOM S.A.</title>
+{% block title %}
+Clientes - IMPORDYCOM S.A.
+{% endblock %}
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block content %}
 
-    <!-- CSS del proyecto -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+<section class="my-5">
 
-<body>
+    <h2 class="text-center mb-4">
+        Gestión de Clientes
+    </h2>
 
-    <!-- HEADER -->
-    <header class="header-custom text-center py-4 shadow">
+    <!-- FORMULARIO -->
+    <div class="row justify-content-center mb-5">
 
-        <h1>IMPORDYCOM S.A.</h1>
+        <div class="col-lg-6">
 
-        <h2 class="mt-3">
-            Gestión de Clientes
-        </h2>
+            <form class="shadow">
 
-    </header>
+                <h3 class="text-center mb-4">
+                    Registro de Clientes
+                </h3>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-dark bg-dark">
+                <div class="mb-3">
 
-        <div class="container">
+                    <label for="nombre" class="form-label">
+                        Nombre del cliente
+                    </label>
 
-            <a class="navbar-brand" href="/">
-                IMPORDYCOM S.A.
-            </a>
-
-            <a class="btn btn-outline-light" href="/">
-                Volver al inicio
-            </a>
-
-        </div>
-
-    </nav>
-
-    <!-- CONTENIDO -->
-    <main class="container my-5">
-
-        <section>
-
-            <h2 class="text-center mb-4">
-                Registro de Clientes
-            </h2>
-
-            <div class="row justify-content-center">
-
-                <div class="col-lg-6">
-
-                    <form class="shadow">
-
-                        <div class="mb-3">
-
-                            <label for="nombre" class="form-label">
-                                Nombre del cliente
-                            </label>
-
-                            <input
-                                type="text"
-                                id="nombre"
-                                class="form-control"
-                                placeholder="Ingrese el nombre">
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="correo" class="form-label">
-                                Correo electrónico
-                            </label>
-
-                            <input
-                                type="email"
-                                id="correo"
-                                class="form-control"
-                                placeholder="Ingrese el correo">
-
-                        </div>
-
-                        <div class="mb-3">
-
-                            <label for="telefono" class="form-label">
-                                Teléfono
-                            </label>
-
-                            <input
-                                type="text"
-                                id="telefono"
-                                class="form-control"
-                                placeholder="Ingrese el teléfono">
-
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="btn btn-success w-100">
-
-                            Registrar Cliente
-
-                        </button>
-
-                    </form>
+                    <input
+                        type="text"
+                        id="nombre"
+                        class="form-control"
+                        placeholder="Ingrese el nombre">
 
                 </div>
 
+                <div class="mb-3">
+
+                    <label for="correo" class="form-label">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        class="form-control"
+                        placeholder="Ingrese el correo">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="telefono" class="form-label">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="text"
+                        id="telefono"
+                        class="form-control"
+                        placeholder="Ingrese el teléfono">
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100">
+
+                    Registrar Cliente
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- CLIENTES DINÁMICOS -->
+    <div class="seccion-plantilla">
+
+        <h3 class="text-center mb-4">
+            Clientes registrados
+        </h3>
+
+        {% if clientes %}
+
+            <div class="row">
+
+                {% for cliente in clientes %}
+
+                    <div class="col-md-6 col-lg-4 mb-3">
+
+                        <div class="card h-100 shadow">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    {{ cliente.nombre }}
+                                </h5>
+
+                                <p class="card-text mb-1">
+                                    <strong>Correo:</strong>
+                                    {{ cliente.correo }}
+                                </p>
+
+                                <p class="card-text">
+                                    <strong>Teléfono:</strong>
+                                    {{ cliente.telefono }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
             </div>
 
-        </section>
+        {% else %}
 
-    </main>
+            <div class="alert alert-info text-center">
+                No existen clientes registrados.
+            </div>
 
-    <!-- FOOTER -->
-    <footer class="text-center bg-dark text-white p-3">
+        {% endif %}
 
-        <p class="m-0">
-            Elaborado por: Stalin Mendieta & Lilian Quijije |
-            Desarrollo de Aplicaciones Web |
-            2026
-        </p>
+    </div>
 
-    </footer>
+</section>
 
-</body>
-
-</html>
+{% endblock %}
