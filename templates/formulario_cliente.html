@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}
+Formulario de Cliente - IMPORDYCOM S.A.
+{% endblock %}
+
+{% block content %}
+
+<section class="my-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <form method="POST" class="shadow">
+
+                {{ form.hidden_tag() }}
+
+                <h2 class="text-center mb-4">
+                    Registro de Cliente
+                </h2>
+
+                <div class="mb-3">
+
+                    {{ form.nombre.label(class="form-label") }}
+
+                    {{ form.nombre(
+                        class="form-control",
+                        placeholder="Ingrese el nombre del cliente"
+                    ) }}
+
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="mb-3">
+
+                    {{ form.correo.label(class="form-label") }}
+
+                    {{ form.correo(
+                        class="form-control",
+                        placeholder="Ingrese el correo electrónico"
+                    ) }}
+
+                    {% for error in form.correo.errors %}
+                        <div class="text-danger mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="mb-3">
+
+                    {{ form.telefono.label(class="form-label") }}
+
+                    {{ form.telefono(
+                        class="form-control",
+                        placeholder="Ingrese el teléfono"
+                    ) }}
+
+                    {% for error in form.telefono.errors %}
+                        <div class="text-danger mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                {{ form.submit(class="btn btn-success w-100") }}
+
+            </form>
+
+            {% if cliente %}
+
+                <div class="alert alert-success mt-4">
+
+                    <h4>Cliente registrado correctamente</h4>
+
+                    <p class="mb-1">
+                        <strong>Nombre:</strong>
+                        {{ cliente.nombre }}
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Correo:</strong>
+                        {{ cliente.correo }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Teléfono:</strong>
+                        {{ cliente.telefono }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

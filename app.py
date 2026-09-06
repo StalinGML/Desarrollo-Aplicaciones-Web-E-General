@@ -1,6 +1,15 @@
 from flask import Flask, render_template, request, redirect
+from forms import (
+    ProductoForm,
+    ClienteForm,
+    ProveedorForm,
+    FacturacionForm
+)
 
 app = Flask(__name__)
+
+# Clave secreta para Flask-WTF y protección CSRF
+app.config["SECRET_KEY"] = "clave-secreta-proyecto"
 
 solicitudes = []
 
@@ -109,6 +118,34 @@ def productos():
 
 
 # ==============================
+# FORMULARIO DE PRODUCTOS
+# ==============================
+
+@app.route("/formulario-producto", methods=["GET", "POST"])
+def formulario_producto():
+
+    form = ProductoForm()
+
+    if form.validate_on_submit():
+
+        producto = {
+            "nombre": form.nombre.data,
+            "descripcion": form.descripcion.data
+        }
+
+        return render_template(
+            "formulario_producto.html",
+            form=form,
+            producto=producto
+        )
+
+    return render_template(
+        "formulario_producto.html",
+        form=form
+    )
+
+
+# ==============================
 # PÁGINA DE CLIENTES
 # ==============================
 
@@ -136,6 +173,35 @@ def clientes():
     return render_template(
         "clientes.html",
         clientes=clientes
+    )
+
+
+# ==============================
+# FORMULARIO DE CLIENTES
+# ==============================
+
+@app.route("/formulario-cliente", methods=["GET", "POST"])
+def formulario_cliente():
+
+    form = ClienteForm()
+
+    if form.validate_on_submit():
+
+        cliente = {
+            "nombre": form.nombre.data,
+            "correo": form.correo.data,
+            "telefono": form.telefono.data
+        }
+
+        return render_template(
+            "formulario_cliente.html",
+            form=form,
+            cliente=cliente
+        )
+
+    return render_template(
+        "formulario_cliente.html",
+        form=form
     )
 
 
@@ -174,6 +240,36 @@ def proveedores():
 
 
 # ==============================
+# FORMULARIO DE PROVEEDORES
+# ==============================
+
+@app.route("/formulario-proveedor", methods=["GET", "POST"])
+def formulario_proveedor():
+
+    form = ProveedorForm()
+
+    if form.validate_on_submit():
+
+        proveedor = {
+            "empresa": form.empresa.data,
+            "contacto": form.contacto.data,
+            "correo": form.correo.data,
+            "telefono": form.telefono.data
+        }
+
+        return render_template(
+            "formulario_proveedor.html",
+            form=form,
+            proveedor=proveedor
+        )
+
+    return render_template(
+        "formulario_proveedor.html",
+        form=form
+    )
+
+
+# ==============================
 # PÁGINA DE FACTURACIÓN
 # ==============================
 
@@ -207,6 +303,41 @@ def facturacion():
     return render_template(
         "facturacion.html",
         facturas=facturas
+    )
+
+
+# ==============================
+# FORMULARIO DE FACTURACIÓN
+# ==============================
+
+@app.route("/formulario-facturacion", methods=["GET", "POST"])
+def formulario_facturacion():
+
+    form = FacturacionForm()
+
+    if form.validate_on_submit():
+
+        cantidad = form.cantidad.data
+        precio = float(form.precio.data)
+        total = cantidad * precio
+
+        factura = {
+            "cliente": form.cliente.data,
+            "producto": form.producto.data,
+            "cantidad": cantidad,
+            "precio": precio,
+            "total": total
+        }
+
+        return render_template(
+            "formulario_facturacion.html",
+            form=form,
+            factura=factura
+        )
+
+    return render_template(
+        "formulario_facturacion.html",
+        form=form
     )
 
 

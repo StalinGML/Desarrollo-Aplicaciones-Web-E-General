@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+Formulario de Producto - IMPORDYCOM S.A.
+{% endblock %}
+
+{% block content %}
+
+<section class="my-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <form method="POST" class="shadow">
+
+                {{ form.hidden_tag() }}
+
+                <h2 class="text-center mb-4">
+                    Registro de Producto
+                </h2>
+
+                <div class="mb-3">
+
+                    {{ form.nombre.label(class="form-label") }}
+
+                    {{ form.nombre(
+                        class="form-control",
+                        placeholder="Ingrese el nombre del producto"
+                    ) }}
+
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="mb-3">
+
+                    {{ form.descripcion.label(class="form-label") }}
+
+                    {{ form.descripcion(
+                        class="form-control",
+                        rows="4",
+                        placeholder="Ingrese la descripción del producto"
+                    ) }}
+
+                    {% for error in form.descripcion.errors %}
+                        <div class="text-danger mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                {{ form.submit(class="btn btn-success w-100") }}
+
+            </form>
+
+            {% if producto %}
+
+                <div class="alert alert-success mt-4">
+
+                    <h4>Producto registrado correctamente</h4>
+
+                    <p class="mb-1">
+                        <strong>Nombre:</strong>
+                        {{ producto.nombre }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Descripción:</strong>
+                        {{ producto.descripcion }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
