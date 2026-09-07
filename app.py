@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, redirect
+import sqlite3
+import os
+
 from forms import (
     ProductoForm,
     ClienteForm,
@@ -7,6 +10,35 @@ from forms import (
 )
 
 app = Flask(__name__)
+
+# ==============================
+# CONFIGURACIÓN DE SQLITE
+# ==============================
+
+DATABASE = os.path.join("data", "ferreteria.db")
+
+
+def conectar_db():
+    return sqlite3.connect(DATABASE)
+
+
+def inicializar_db():
+
+    os.makedirs("data", exist_ok=True)
+
+    conn = conectar_db()
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS productos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            descripcion TEXT NOT NULL
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
 
 # Clave secreta para Flask-WTF y protección CSRF
 app.config["SECRET_KEY"] = "clave-secreta-proyecto"
@@ -58,6 +90,7 @@ def inicio():
 @app.route("/productos")
 def productos():
 
+    # Catálogo existente
     productos = [
         {
             "nombre": "Tubos",
@@ -111,9 +144,21 @@ def productos():
         }
     ]
 
+    # Productos almacenados en SQLite
+    conn = conectar_db()
+
+    cursor = conn.execute(
+        "SELECT id, nombre, descripcion FROM productos"
+    )
+
+    productos_db = cursor.fetchall()
+
+    conn.close()
+
     return render_template(
         "productos.html",
-        productos=productos
+        productos=productos,
+        productos_db=productos_db
     )
 
 
@@ -127,6 +172,22 @@ def formulario_producto():
     form = ProductoForm()
 
     if form.validate_on_submit():
+
+        conn = conectar_db()
+
+        conn.execute(
+            """
+            INSERT INTO productos (nombre, descripcion)
+            VALUES (?, ?)
+            """,
+            (
+                form.nombre.data,
+                form.descripcion.data
+            )
+        )
+
+        conn.commit()
+        conn.close()
 
         producto = {
             "nombre": form.nombre.data,
@@ -143,6 +204,79 @@ def formulario_producto():
         "formulario_producto.html",
         form=form
     )
+
+
+# ==============================
+# EDITAR PRODUCTO
+# ==============================
+
+@app.route("/editar-producto/<int:id>", methods=["GET", "POST"])
+def editar_producto(id):
+
+    conn = conectar_db()
+
+    producto = conn.execute(
+        "SELECT id, nombre, descripcion FROM productos WHERE id = ?",
+        (id,)
+    ).fetchone()
+
+    conn.close()
+
+    if producto is None:
+        return redirect("/productos")
+
+    form = ProductoForm()
+
+    if request.method == "GET":
+        form.nombre.data = producto[1]
+        form.descripcion.data = producto[2]
+
+    if form.validate_on_submit():
+
+        conn = conectar_db()
+
+        conn.execute(
+            """
+            UPDATE productos
+            SET nombre = ?, descripcion = ?
+            WHERE id = ?
+            """,
+            (
+                form.nombre.data,
+                form.descripcion.data,
+                id
+            )
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/productos")
+
+    return render_template(
+        "formulario_producto.html",
+        form=form
+    )
+
+
+# ==============================
+# ELIMINAR PRODUCTO
+# ==============================
+
+@app.route("/eliminar-producto/<int:id>", methods=["POST"])
+def eliminar_producto(id):
+
+    conn = conectar_db()
+
+    conn.execute(
+        "DELETE FROM productos WHERE id = ?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/productos")
 
 
 # ==============================
@@ -398,4 +532,5 @@ def eliminar(indice):
 # ==============================
 
 if __name__ == "__main__":
+    inicializar_db()
     app.run(debug=True)
