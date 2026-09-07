@@ -7,27 +7,24 @@
 **Período académico:** 2026–2026  
 
 ## Descripción del trabajo
-Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia y funcionalidades dinámicas mediante JavaScript.  
-En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y elementos multimedia relacionados con su actividad. Además, incorpora un sistema dinámico de registro de solicitudes con validaciones en tiempo real, renderización dinámica de contenido mediante JavaScript y una estructura organizada por secciones reutilizables, preparada para una futura integración con Flask y bases de datos.  
+Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia, funcionalidades dinámicas mediante JavaScript y posteriormente un backend desarrollado con Flask.
 
-## Estructura del código  
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y diferentes módulos para la gestión de productos, clientes, proveedores y facturación. Además, incorpora formularios validados mediante Flask-WTF y persistencia de productos utilizando una base de datos SQLite.
+
+## Estructura del código
 El proyecto está compuesto por:  
-- Archivo principal `index.html`
-- Archivo JavaScript `script.js`  
-- Hoja de estilos `style.css`  
-- Carpeta de imágenes (`img`)  
-- Estructura en HTML5  
-- Encabezados `<h1>`, `<h2>` y `<h3>`  
-- Menú de navegación  
-- Secciones de contenido  
-- Imágenes y video incrustado  
-- Formulario de contacto  
-- Estilos con CSS3  
-- Integración de Bootstrap para diseño responsivo  
-- Componentes Bootstrap (Navbar, Cards, Modal, Spinner y Formularios)  
-- Validaciones dinámicas con JavaScript   
-- Renderización dinámica de contenido mediante arreglos y objetos  
-- Organización preparada para futuras plantillas de Flask  
+- Archivo principal `app.py`
+- Carpeta `templates/` para las plantillas HTML
+- Plantilla base `base.html`
+- Carpeta `forms/` para los formularios Flask-WTF y sus validaciones
+- Carpeta `static/` para archivos CSS, JavaScript e imágenes
+- Carpeta `data/` para la base de datos SQLite
+- Base de datos `ferreteria.db`
+- Rutas y enlaces dinámicos mediante Flask y `url_for()`
+- Herencia de plantillas con Jinja2
+- Diseño responsivo mediante Bootstrap
+- Validaciones de formularios con Flask-WTF y WTForms
+- Operaciones de almacenamiento y gestión de productos mediante SQLite
 
 ## Avances del proyecto  
 
@@ -85,4 +82,37 @@ El proyecto está compuesto por:
 - Implementación de un indicador de carga durante el registro de solicitudes.  
 - Mejora del diseño del formulario mediante `form-control`, `form-select` y el sistema Grid de Bootstrap.  
 - Optimización de la interfaz utilizando clases utilitarias y componentes responsivos de Bootstrap.  
-- Incorporación de una ventana Modal para mostrar información adicional de la empresa.  
+- Incorporación de una ventana Modal para mostrar información adicional de la empresa.
+
+### Semana 9
+- Integración del proyecto con el framework **Flask**.
+- Creación de rutas para las diferentes páginas del sitio.
+- Adaptación de las páginas HTML existentes a una estructura basada en Flask.
+- Organización del proyecto para trabajar con plantillas dinámicas mediante Jinja2.
+- Conservación de los estilos, imágenes y funcionalidades desarrolladas anteriormente.
+
+### Semana 10
+- Implementación de **plantillas dinámicas con Flask y Jinja2**.
+- Creación de la plantilla base `base.html`.
+- Uso de herencia de plantillas mediante `{% extends %}` y `{% block %}`.
+- Implementación de componentes reutilizables.
+- Uso de `url_for()` para la generación de rutas.
+- Organización de las páginas de productos, clientes, proveedores y facturación.
+
+### Semana 11
+- Implementación de **Flask-WTF y WTForms** para la validación de formularios.
+- Creación de formularios para productos, clientes, proveedores y facturación.
+- Organización de los formularios dentro de la carpeta `forms/`.
+- Implementación de validaciones como `DataRequired`, `Length`, `Email`, `Regexp` y `NumberRange`.
+- Uso de `form.validate_on_submit()` para validar los datos recibidos.
+- Implementación de protección CSRF mediante `form.hidden_tag()`.
+- Actualización de `requirements.txt` con las dependencias utilizadas.
+
+### Semana 12
+- Implementación de **persistencia de datos mediante SQLite**.
+- Creación de la base de datos `data/ferreteria.db` y la tabla `productos`.
+- Conexión de Flask con SQLite mediante `sqlite3`.
+- Almacenamiento de productos utilizando consultas `INSERT` parametrizadas.
+- Consulta y visualización de productos mediante `SELECT`, `fetchall()` y Jinja2.
+- Implementación de edición y eliminación de productos mediante `UPDATE` y `DELETE`.
+- Comprobación de la persistencia de los datos después de cerrar y reiniciar la aplicación Flask.
