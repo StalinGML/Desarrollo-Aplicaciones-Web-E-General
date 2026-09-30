@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
-import sqlite3
 import os
+
+from conexion.conexion import obtener_conexion
 
 from forms import (
     ProductoForm,
@@ -12,32 +13,10 @@ from forms import (
 app = Flask(__name__)
 
 # ==============================
-# CONFIGURACIÓN DE SQLITE
+# CONFIGURACIÓN DE MYSQL
 # ==============================
 
 DATABASE = os.path.join("data", "ferreteria.db")
-
-
-def conectar_db():
-    return sqlite3.connect(DATABASE)
-
-
-def inicializar_db():
-
-    os.makedirs("data", exist_ok=True)
-
-    conn = conectar_db()
-
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS productos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            descripcion TEXT NOT NULL
-        )
-    """)
-
-    conn.commit()
-    conn.close()
 
 
 # Clave secreta para Flask-WTF y protección CSRF
@@ -144,16 +123,28 @@ def productos():
         }
     ]
 
-    # Productos almacenados en SQLite
-    conn = conectar_db()
+    # Productos almacenados en la base de datos
 
-    cursor = conn.execute(
-        "SELECT id, nombre, descripcion FROM productos"
-    )
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+    SELECT
+        p.id_producto,
+        p.nombre,
+        p.descripcion,
+        p.precio,
+        p.stock,
+        pr.nombre
+    FROM productos p
+    LEFT JOIN proveedores pr
+        ON p.id_proveedor = pr.id_proveedor
+""")
 
     productos_db = cursor.fetchall()
 
-    conn.close()
+    cursor.close()
+    conexion.close()
 
     return render_template(
         "productos.html",
@@ -173,21 +164,21 @@ def formulario_producto():
 
     if form.validate_on_submit():
 
-        conn = conectar_db()
+        conexion = obtener_conexion()
+        cursor = conexion.cursor()
 
-        conn.execute(
+        cursor.execute(
             """
             INSERT INTO productos (nombre, descripcion)
-            VALUES (?, ?)
+            VALUES (%s, %s)
             """,
-            (
-                form.nombre.data,
-                form.descripcion.data
-            )
+            (form.nombre.data, form.descripcion.data)
         )
 
-        conn.commit()
-        conn.close()
+        conexion.commit()
+
+        cursor.close()
+        conexion.close()
 
         producto = {
             "nombre": form.nombre.data,
@@ -213,14 +204,22 @@ def formulario_producto():
 @app.route("/editar-producto/<int:id>", methods=["GET", "POST"])
 def editar_producto(id):
 
-    conn = conectar_db()
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
 
-    producto = conn.execute(
-        "SELECT id, nombre, descripcion FROM productos WHERE id = ?",
+    cursor.execute(
+        """
+        SELECT id_producto, nombre, descripcion
+        FROM productos
+        WHERE id_producto = %s
+        """,
         (id,)
-    ).fetchone()
+    )
 
-    conn.close()
+    producto = cursor.fetchone()
+
+    cursor.close()
+    conexion.close()
 
     if producto is None:
         return redirect("/productos")
@@ -233,13 +232,14 @@ def editar_producto(id):
 
     if form.validate_on_submit():
 
-        conn = conectar_db()
+        conexion = obtener_conexion()
+        cursor = conexion.cursor()
 
-        conn.execute(
+        cursor.execute(
             """
             UPDATE productos
-            SET nombre = ?, descripcion = ?
-            WHERE id = ?
+            SET nombre = %s, descripcion = %s
+            WHERE id_producto = %s
             """,
             (
                 form.nombre.data,
@@ -248,8 +248,10 @@ def editar_producto(id):
             )
         )
 
-        conn.commit()
-        conn.close()
+        conexion.commit()
+
+        cursor.close()
+        conexion.close()
 
         return redirect("/productos")
 
@@ -258,7 +260,6 @@ def editar_producto(id):
         form=form
     )
 
-
 # ==============================
 # ELIMINAR PRODUCTO
 # ==============================
@@ -266,15 +267,18 @@ def editar_producto(id):
 @app.route("/eliminar-producto/<int:id>", methods=["POST"])
 def eliminar_producto(id):
 
-    conn = conectar_db()
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
 
-    conn.execute(
-        "DELETE FROM productos WHERE id = ?",
+    cursor.execute(
+        "DELETE FROM productos WHERE id_producto = %s",
         (id,)
     )
 
-    conn.commit()
-    conn.close()
+    conexion.commit()
+
+    cursor.close()
+    conexion.close()
 
     return redirect("/productos")
 
@@ -532,5 +536,4 @@ def eliminar(indice):
 # ==============================
 
 if __name__ == "__main__":
-    inicializar_db()
     app.run(debug=True)

@@ -89,7 +89,7 @@ Productos - IMPORDYCOM S.A.
     </h2>
 
     <p class="text-center mb-4">
-        Productos almacenados mediante el formulario y la base de datos SQLite.
+        Productos almacenados mediante el formulario y la base de datos.
     </p>
 
     <div class="table-responsive">
@@ -102,6 +102,9 @@ Productos - IMPORDYCOM S.A.
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Proveedor</th>
                     <th>Acciones</th>
                 </tr>
 
@@ -126,6 +129,18 @@ Productos - IMPORDYCOM S.A.
                         </td>
 
                         <td>
+                            ${{ producto[3] }}
+                        </td>
+
+                        <td>
+                            {{ producto[4] }}
+                        </td>
+
+                        <td>
+                            {{ producto[5] or 'Sin proveedor' }}
+                        </td>
+
+                        <td class="text-nowrap">
 
                             <a
                                 href="{{ url_for('editar_producto', id=producto[0]) }}"
@@ -155,7 +170,7 @@ Productos - IMPORDYCOM S.A.
 
                     <tr>
 
-                        <td colspan="4" class="text-center">
+                        <td colspan="7" class="text-center">
                             No hay productos registrados todavía.
                         </td>
 
