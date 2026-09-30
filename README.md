@@ -9,7 +9,7 @@
 ## Descripción del trabajo
 Este repositorio reúne el desarrollo de las actividades prácticas realizadas en la asignatura Desarrollo de Aplicaciones Web. El proyecto comenzó con una página web básica en HTML y, con el avance de las semanas, ha evolucionado incorporando estructura semántica, contenido multimedia, funcionalidades dinámicas mediante JavaScript y posteriormente un backend desarrollado con Flask.
 
-En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y diferentes módulos para la gestión de productos, clientes, proveedores y facturación. Además, incorpora formularios validados mediante Flask-WTF y persistencia de productos utilizando una base de datos SQLite.
+En su versión actual, el proyecto presenta una página web institucional para IMPORDYCOM S.A., una empresa dedicada a la importación y distribución de materiales de acero inoxidable en Ecuador. El sitio incluye información sobre la empresa, sus productos, medios de contacto y diferentes módulos para la gestión de productos, clientes, proveedores y facturación. Además, incorpora formularios validados mediante Flask-WTF y persistencia de productos utilizando una base de datos relacional MySQL.
 
 ## Estructura del código
 El proyecto está compuesto por:  
@@ -18,13 +18,14 @@ El proyecto está compuesto por:
 - Plantilla base `base.html`
 - Carpeta `forms/` para los formularios Flask-WTF y sus validaciones
 - Carpeta `static/` para archivos CSS, JavaScript e imágenes
-- Carpeta `data/` para la base de datos SQLite
-- Base de datos `ferreteria.db`
+- Carpeta `data/` que conserva la base de datos SQLite utilizada en el avance anterior
+- Carpeta `conexion/` para la conexión centralizada con MySQL
+- Carpeta `sql/` para el esquema de la base de datos relacional
 - Rutas y enlaces dinámicos mediante Flask y `url_for()`
 - Herencia de plantillas con Jinja2
 - Diseño responsivo mediante Bootstrap
 - Validaciones de formularios con Flask-WTF y WTForms
-- Operaciones de almacenamiento y gestión de productos mediante SQLite
+- Operaciones de consulta y gestión de productos mediante MySQL
 
 ## Avances del proyecto  
 
@@ -116,3 +117,12 @@ El proyecto está compuesto por:
 - Consulta y visualización de productos mediante `SELECT`, `fetchall()` y Jinja2.
 - Implementación de edición y eliminación de productos mediante `UPDATE` y `DELETE`.
 - Comprobación de la persistencia de los datos después de cerrar y reiniciar la aplicación Flask.
+
+### Semana 13
+- Migración de la persistencia de productos desde **SQLite hacia MySQL**.
+- Configuración de la base de datos relacional `impordycom_web` mediante `sql/esquema.sql`.
+- Implementación de una conexión centralizada con `mysql-connector-python` y variables de entorno.
+- Creación de las tablas `productos`, `proveedores`, `clientes` y `facturas`, utilizando claves primarias y foráneas.
+- Implementación de operaciones **SELECT, INSERT, UPDATE y DELETE** mediante consultas parametrizadas.
+- Uso de consultas `JOIN` para relacionar productos con proveedores.
+- Verificación de la persistencia de los datos y actualización de `requirements.txt`.
