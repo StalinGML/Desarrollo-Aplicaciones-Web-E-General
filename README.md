@@ -126,3 +126,13 @@ El proyecto está compuesto por:
 - Implementación de operaciones **SELECT, INSERT, UPDATE y DELETE** mediante consultas parametrizadas.
 - Uso de consultas `JOIN` para relacionar productos con proveedores.
 - Verificación de la persistencia de los datos y actualización de `requirements.txt`.
+
+### Semana 14
+- Implementación de un **sistema de login funcional** con Flask-Login.
+- Registro de usuarios y almacenamiento seguro de contraseñas mediante **hash**.
+- Implementación de inicio y cierre de sesión con `login_user()` y `logout_user()`.
+- Protección de las rutas internas de **productos, clientes, proveedores y facturación** mediante `@login_required`.
+- Creación de las vistas de **login, registro y dashboard**, integradas con Jinja2 y Bootstrap.
+- Configuración de `SECRET_KEY` y credenciales mediante **variables de entorno**.
+- Actualización de `requirements.txt` y `sql/esquema.sql`.
+- Realización de pruebas funcionales del sistema de autenticación.
