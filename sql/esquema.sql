@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS proveedores (
     correo VARCHAR(100)
 );
 
+
 -- ==========================================
 -- TABLA: productos
 -- ==========================================
@@ -24,11 +25,12 @@ CREATE TABLE IF NOT EXISTS productos (
     precio DECIMAL(10,2) DEFAULT 0.00,
     stock INT DEFAULT 0,
     id_proveedor INT,
-    
+
     CONSTRAINT fk_producto_proveedor
         FOREIGN KEY (id_proveedor)
         REFERENCES proveedores(id_proveedor)
 );
+
 
 -- ==========================================
 -- TABLA: clientes
@@ -41,6 +43,7 @@ CREATE TABLE IF NOT EXISTS clientes (
     telefono VARCHAR(15),
     correo VARCHAR(100)
 );
+
 
 -- ==========================================
 -- TABLA: facturas
@@ -56,6 +59,29 @@ CREATE TABLE IF NOT EXISTS facturas (
         FOREIGN KEY (id_cliente)
         REFERENCES clientes(id_cliente)
 );
+
+
+-- ==========================================
+-- TABLA: detalle_factura
+-- ==========================================
+
+CREATE TABLE IF NOT EXISTS detalle_factura (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT fk_detalle_factura
+        FOREIGN KEY (id_factura)
+        REFERENCES facturas(id_factura),
+
+    CONSTRAINT fk_detalle_producto
+        FOREIGN KEY (id_producto)
+        REFERENCES productos(id_producto)
+);
+
 
 -- ==========================================
 -- TABLA: usuarios

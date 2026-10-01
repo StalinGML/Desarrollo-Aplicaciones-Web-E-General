@@ -8,163 +8,323 @@ Facturación - IMPORDYCOM S.A.
 
 <section class="my-5">
 
-    <h2 class="text-center mb-4">
-        Gestión de Facturación
-    </h2>
+```
+<div class="container">
 
-    <!-- FORMULARIO -->
-    <div class="row justify-content-center mb-5">
+    <!-- ENCABEZADO -->
 
-        <div class="col-lg-7">
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-            <form class="shadow">
+        <div>
+            <h2 class="mb-1">
+                Gestión de Facturación
+            </h2>
 
-                <h3 class="text-center mb-4">
-                    Registro de Facturación
-                </h3>
+            <p class="text-muted mb-0">
+                Registro y consulta de facturas
+            </p>
+        </div>
 
-                <div class="mb-3">
+        <a
+            href="{{ url_for('formulario_facturacion') }}"
+            class="btn btn-success">
 
-                    <label for="cliente" class="form-label">
-                        Cliente
-                    </label>
+            + Registrar factura
 
-                    <input
-                        type="text"
-                        id="cliente"
-                        class="form-control"
-                        placeholder="Ingrese el nombre del cliente">
+        </a>
+
+    </div>
+
+
+    <!-- FACTURAS REGISTRADAS -->
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4 class="mb-4">
+                Facturas registradas
+            </h4>
+
+
+            {% if facturas_db %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover align-middle">
+
+                        <thead class="table-dark">
+
+                            <tr>
+
+                                <th>
+                                    N.º Factura
+                                </th>
+
+                                <th>
+                                    Cliente
+                                </th>
+
+                                <th>
+                                    Producto
+                                </th>
+
+                                <th>
+                                    Cantidad
+                                </th>
+
+                                <th>
+                                    Precio unitario
+                                </th>
+
+                                <th>
+                                    Subtotal
+                                </th>
+
+                                <th>
+                                    Fecha
+                                </th>
+
+                                <th>
+                                    Total
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for factura in facturas_db %}
+
+                                <tr>
+
+                                    <!-- NÚMERO DE FACTURA -->
+
+                                    <td>
+                                        <strong>
+                                            {{ factura[1] }}
+                                        </strong>
+                                    </td>
+
+
+                                    <!-- CLIENTE -->
+
+                                    <td>
+                                        {{ factura[2] }}
+                                    </td>
+
+
+                                    <!-- PRODUCTO -->
+
+                                    <td>
+                                        {{ factura[3] }}
+                                    </td>
+
+
+                                    <!-- CANTIDAD -->
+
+                                    <td>
+                                        {{ factura[4] }}
+                                    </td>
+
+
+                                    <!-- PRECIO -->
+
+                                    <td>
+                                        ${{ "%.2f"|format(factura[5]) }}
+                                    </td>
+
+
+                                    <!-- SUBTOTAL -->
+
+                                    <td>
+                                        ${{ "%.2f"|format(factura[6]) }}
+                                    </td>
+
+
+                                    <!-- FECHA -->
+
+                                    <td>
+                                        {{ factura[7] }}
+                                    </td>
+
+
+                                    <!-- TOTAL -->
+
+                                    <td>
+                                        <strong>
+                                            ${{ "%.2f"|format(factura[8]) }}
+                                        </strong>
+                                    </td>
+
+
+                                    <!-- ESTADO -->
+
+                                    <td class="text-center">
+
+                                        {% if factura[9] == "ACTIVA" %}
+
+                                            <span class="badge bg-success">
+                                                ACTIVA
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge bg-danger">
+                                                ANULADA
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <!-- ACCIONES -->
+
+                                    <td class="text-center">
+
+                                        <div class="acciones-factura">
+
+                                            <!-- DESCARGAR PDF -->
+
+                                            <a
+                                                href="{{ url_for('descargar_factura', id=factura[0]) }}"
+                                                class="btn btn-primary btn-sm boton-accion"
+                                                title="Descargar PDF">
+
+                                                <span class="icono-accion">📄</span>
+
+                                            </a>
+
+
+                                            {% if factura[9] == "ACTIVA" %}
+
+                                                <!-- EDITAR -->
+
+                                                <a
+                                                    href="{{ url_for('editar_factura', id=factura[0]) }}"
+                                                    class="btn btn-warning btn-sm boton-accion"
+                                                    title="Editar factura">
+
+                                                    <span class="icono-accion">✏️</span>
+
+                                                </a>
+
+
+                                                <!-- ANULAR -->
+
+                                                <form
+                                                    action="{{ url_for('anular_factura', id=factura[0]) }}"
+                                                    method="POST"
+                                                    class="form-anular"
+                                                    onsubmit="return confirm('¿Está seguro de anular esta factura? El stock será devuelto.');">
+
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-danger btn-sm boton-accion"
+                                                        title="Anular factura">
+
+                                                        <span class="icono-accion">🚫</span>
+
+                                                    </button>
+
+                                                </form>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
-                <div class="mb-3">
+            {% else %}
 
-                    <label for="producto" class="form-label">
-                        Producto
-                    </label>
+                <div class="alert alert-info text-center mb-0">
 
-                    <input
-                        type="text"
-                        id="producto"
-                        class="form-control"
-                        placeholder="Ingrese el producto">
+                    No existen facturas registradas.
 
                 </div>
 
-                <div class="mb-3">
-
-                    <label for="cantidad" class="form-label">
-                        Cantidad
-                    </label>
-
-                    <input
-                        type="number"
-                        id="cantidad"
-                        class="form-control"
-                        min="1"
-                        placeholder="Ingrese la cantidad">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label for="precio" class="form-label">
-                        Precio unitario
-                    </label>
-
-                    <input
-                        type="number"
-                        id="precio"
-                        class="form-control"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ingrese el precio">
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-success w-100">
-
-                    Registrar Factura
-
-                </button>
-
-            </form>
+            {% endif %}
 
         </div>
 
     </div>
 
-
-    <!-- FACTURAS DINÁMICAS -->
-    <div class="seccion-plantilla">
-
-        <h3 class="text-center mb-4">
-            Facturas registradas
-        </h3>
-
-        {% if facturas %}
-
-            <div class="row">
-
-                {% for factura in facturas %}
-
-                    <div class="col-md-6 col-lg-4 mb-3">
-
-                        <div class="card h-100 shadow">
-
-                            <div class="card-body">
-
-                                <h5 class="card-title">
-                                    Factura #{{ loop.index }}
-                                </h5>
-
-                                <p class="card-text mb-1">
-                                    <strong>Cliente:</strong>
-                                    {{ factura.cliente }}
-                                </p>
-
-                                <p class="card-text mb-1">
-                                    <strong>Producto:</strong>
-                                    {{ factura.producto }}
-                                </p>
-
-                                <p class="card-text mb-1">
-                                    <strong>Cantidad:</strong>
-                                    {{ factura.cantidad }}
-                                </p>
-
-                                <p class="card-text mb-1">
-                                    <strong>Precio unitario:</strong>
-                                    ${{ "%.2f"|format(factura.precio) }}
-                                </p>
-
-                                <p class="card-text">
-                                    <strong>Total:</strong>
-                                    ${{ "%.2f"|format(factura.total) }}
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                {% endfor %}
-
-            </div>
-
-        {% else %}
-
-            <div class="alert alert-info text-center">
-                No existen facturas registradas.
-            </div>
-
-        {% endif %}
-
-    </div>
+</div>
+```
 
 </section>
+
+<!-- ESTILOS DE LOS BOTONES -->
+
+<style>
+
+    /* CONTENEDOR DE LOS BOTONES */
+
+    .acciones-factura {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+
+    /* FORMULARIO DE ANULAR */
+
+    .form-anular {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* BOTONES */
+
+    .boton-accion {
+        width: 34px;
+        height: 32px;
+        padding: 0;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        line-height: 1;
+        vertical-align: middle;
+    }
+
+
+    /* EMOJIS */
+
+    .icono-accion {
+        font-size: 14px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>
 
 {% endblock %}

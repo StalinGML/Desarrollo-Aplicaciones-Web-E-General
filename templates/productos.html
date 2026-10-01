@@ -79,18 +79,50 @@ Productos - IMPORDYCOM S.A.
 
 
 <!-- ============================== -->
-<!-- PRODUCTOS REGISTRADOS EN SQLITE -->
+<!-- PRODUCTOS REGISTRADOS -->
 <!-- ============================== -->
 
 <section class="my-5">
 
-    <h2 class="text-center mb-3">
-        Productos registrados
-    </h2>
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
 
-    <p class="text-center mb-4">
-        Productos almacenados mediante el formulario y la base de datos.
-    </p>
+            {% for categoria, mensaje in mensajes %}
+
+                <div
+                    class="alert alert-{{ categoria }} alert-dismissible fade show"
+                    role="alert">
+
+                    {{ mensaje }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Cerrar">
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}
+
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h2 class="mb-0">
+            Productos registrados
+        </h2>
+
+        <a
+            href="{{ url_for('formulario_producto') }}"
+            class="btn btn-primary">
+            Agregar producto
+        </a>
+
+    </div>
 
     <div class="table-responsive">
 

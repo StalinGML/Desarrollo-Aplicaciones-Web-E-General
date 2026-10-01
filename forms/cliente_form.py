@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, SubmitField
+from wtforms import StringField, EmailField
 from wtforms.validators import DataRequired, Length, Email, Regexp
 
 
@@ -17,6 +17,22 @@ class ClienteForm(FlaskForm):
             Regexp(
                 r"^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$",
                 message="El nombre debe contener únicamente letras y espacios."
+            )
+        ]
+    )
+
+    cedula = StringField(
+        "Cédula",
+        validators=[
+            DataRequired(message="La cédula es obligatoria."),
+            Length(
+                min=10,
+                max=10,
+                message="La cédula debe tener exactamente 10 dígitos."
+            ),
+            Regexp(
+                r"^\d{10}$",
+                message="La cédula debe contener únicamente 10 números."
             )
         ]
     )

@@ -12,119 +12,265 @@ Formulario de Facturación - IMPORDYCOM S.A.
 
         <div class="col-lg-7">
 
-            <form method="POST" class="shadow">
+            <div class="card shadow">
 
-                {{ form.hidden_tag() }}
+                <div class="card-body">
 
-                <h2 class="text-center mb-4">
-                    Registro de Facturación
-                </h2>
+                    <h2 class="text-center mb-4">
+                        Registro de Facturación
+                    </h2>
 
-                <div class="mb-3">
 
-                    {{ form.cliente.label(class="form-label") }}
+                    <!-- MENSAJE DE ERROR -->
 
-                    {{ form.cliente(
-                        class="form-control",
-                        placeholder="Ingrese el nombre del cliente"
-                    ) }}
+                    {% if error %}
 
-                    {% for error in form.cliente.errors %}
-                        <div class="text-danger mt-1">
+                        <div class="alert alert-danger">
                             {{ error }}
                         </div>
-                    {% endfor %}
+
+                    {% endif %}
+
+
+                    <form method="POST">
+
+                        {{ form.hidden_tag() }}
+
+
+                        <!-- CLIENTE -->
+
+                        <div class="mb-3">
+
+                            {{ form.cliente.label(class="form-label") }}
+
+                            {{ form.cliente(
+                                class="form-select"
+                            ) }}
+
+                            {% for error in form.cliente.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- PRODUCTO -->
+
+                        <div class="mb-3">
+
+                            {{ form.producto.label(class="form-label") }}
+
+                            {{ form.producto(
+                                class="form-select",
+                                id="producto"
+                            ) }}
+
+                            {% for error in form.producto.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- PRECIO -->
+
+                        <div class="mb-3">
+
+                            <label
+                                for="precio"
+                                class="form-label">
+                                Precio unitario
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    $
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="precio"
+                                    class="form-control"
+                                    value="0.00"
+                                    readonly>
+
+                            </div>
+
+                            <div class="form-text">
+                                El precio se obtiene automáticamente del producto registrado.
+                            </div>
+
+                        </div>
+
+
+                        <!-- CANTIDAD -->
+
+                        <div class="mb-3">
+
+                            {{ form.cantidad.label(class="form-label") }}
+
+                            {{ form.cantidad(
+                                class="form-control",
+                                id="cantidad",
+                                min="1",
+                                placeholder="Ingrese la cantidad"
+                            ) }}
+
+                            {% for error in form.cantidad.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- SUBTOTAL -->
+
+                        <div class="mb-4">
+
+                            <label
+                                for="subtotal"
+                                class="form-label">
+                                Subtotal
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    $
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="subtotal"
+                                    class="form-control fw-bold"
+                                    value="0.00"
+                                    readonly>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOTONES -->
+
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{{ url_for('facturacion') }}"
+                                class="btn btn-secondary">
+
+                                Cancelar
+
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-success">
+
+                                Registrar factura
+
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
-                <div class="mb-3">
+            </div>
 
-                    {{ form.producto.label(class="form-label") }}
 
-                    {{ form.producto(
-                        class="form-control",
-                        placeholder="Ingrese el producto"
-                    ) }}
-
-                    {% for error in form.producto.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
-                        </div>
-                    {% endfor %}
-
-                </div>
-
-                <div class="mb-3">
-
-                    {{ form.cantidad.label(class="form-label") }}
-
-                    {{ form.cantidad(
-                        class="form-control",
-                        min="1",
-                        placeholder="Ingrese la cantidad"
-                    ) }}
-
-                    {% for error in form.cantidad.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
-                        </div>
-                    {% endfor %}
-
-                </div>
-
-                <div class="mb-3">
-
-                    {{ form.precio.label(class="form-label") }}
-
-                    {{ form.precio(
-                        class="form-control",
-                        min="0",
-                        step="0.01",
-                        placeholder="Ingrese el precio unitario"
-                    ) }}
-
-                    {% for error in form.precio.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
-                        </div>
-                    {% endfor %}
-
-                </div>
-
-                {{ form.submit(class="btn btn-success w-100") }}
-
-            </form>
+            <!-- ==========================================
+                 FACTURA REGISTRADA
+                 ========================================== -->
 
             {% if factura %}
 
-                <div class="alert alert-success mt-4">
+                <div class="card shadow mt-4">
 
-                    <h4>Factura registrada correctamente</h4>
+                    <div class="card-body">
 
-                    <p class="mb-1">
-                        <strong>Cliente:</strong>
-                        {{ factura.cliente }}
-                    </p>
+                        <div class="text-center mb-4">
 
-                    <p class="mb-1">
-                        <strong>Producto:</strong>
-                        {{ factura.producto }}
-                    </p>
+                            <h4 class="text-success">
+                                ✓ Factura registrada correctamente
+                            </h4>
 
-                    <p class="mb-1">
-                        <strong>Cantidad:</strong>
-                        {{ factura.cantidad }}
-                    </p>
+                            <h5 class="mt-3">
+                                {{ factura.numero_factura }}
+                            </h5>
 
-                    <p class="mb-1">
-                        <strong>Precio unitario:</strong>
-                        ${{ "%.2f"|format(factura.precio) }}
-                    </p>
+                        </div>
 
-                    <p class="mb-0">
-                        <strong>Total:</strong>
-                        ${{ "%.2f"|format(factura.total) }}
-                    </p>
+
+                        <!-- DATOS DE LA FACTURA -->
+
+                        <div class="mb-4">
+
+                            <p class="mb-2">
+                                <strong>Cliente:</strong>
+                                {{ factura.cliente }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Producto:</strong>
+                                {{ factura.producto }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Cantidad:</strong>
+                                {{ factura.cantidad }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Precio unitario:</strong>
+                                ${{ "%.2f"|format(factura.precio) }}
+                            </p>
+
+                            <p class="mb-0">
+                                <strong>Total:</strong>
+                                ${{ "%.2f"|format(factura.total) }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- BOTONES DE ACCIÓN -->
+
+                        <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                            <a
+                                href="{{ url_for('descargar_factura', id=factura.id_factura) }}"
+                                class="btn btn-danger">
+
+                                🧾 Descargar factura PDF
+
+                            </a>
+
+                            <a
+                                href="{{ url_for('facturacion') }}"
+                                class="btn btn-primary">
+
+                                Ver facturas
+
+                            </a>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -135,5 +281,103 @@ Formulario de Facturación - IMPORDYCOM S.A.
     </div>
 
 </section>
+
+
+<!-- ==========================================
+     CÁLCULO AUTOMÁTICO DEL PRECIO Y SUBTOTAL
+     ========================================== -->
+
+<script>
+
+    // Precios de los productos registrados en la base de datos
+
+    const productos = {
+
+        {% for producto in productos_db %}
+
+            "{{ producto[0] }}": {
+                precio: {{ producto[2] }},
+                stock: {{ producto[3] }}
+            }
+
+            {% if not loop.last %},{% endif %}
+
+        {% endfor %}
+
+    };
+
+
+    const productoSelect =
+        document.getElementById("producto");
+
+    const cantidadInput =
+        document.getElementById("cantidad");
+
+    const precioInput =
+        document.getElementById("precio");
+
+    const subtotalInput =
+        document.getElementById("subtotal");
+
+
+    function actualizarFactura() {
+
+        const idProducto =
+            productoSelect.value;
+
+        const cantidad =
+            parseInt(cantidadInput.value) || 0;
+
+
+        if (
+            idProducto &&
+            productos[idProducto]
+        ) {
+
+            const precio =
+                parseFloat(
+                    productos[idProducto].precio
+                );
+
+
+            precioInput.value =
+                precio.toFixed(2);
+
+
+            const subtotal =
+                precio * cantidad;
+
+
+            subtotalInput.value =
+                subtotal.toFixed(2);
+
+        } else {
+
+            precioInput.value =
+                "0.00";
+
+            subtotalInput.value =
+                "0.00";
+
+        }
+
+    }
+
+
+    productoSelect.addEventListener(
+        "change",
+        actualizarFactura
+    );
+
+
+    cantidadInput.addEventListener(
+        "input",
+        actualizarFactura
+    );
+
+
+    actualizarFactura();
+
+</script>
 
 {% endblock %}

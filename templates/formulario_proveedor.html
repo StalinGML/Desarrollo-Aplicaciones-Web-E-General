@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-Formulario de Proveedor - IMPORDYCOM S.A.
+{% if editar %}
+Editar Proveedor
+{% else %}
+Agregar Proveedor
+{% endif %}
+- IMPORDYCOM S.A.
 {% endblock %}
 
 {% block content %}
@@ -10,117 +15,123 @@ Formulario de Proveedor - IMPORDYCOM S.A.
 
     <div class="row justify-content-center">
 
-        <div class="col-lg-7">
+        <div class="col-lg-6">
 
-            <form method="POST" class="shadow">
+            <div class="card shadow">
 
-                {{ form.hidden_tag() }}
+                <div class="card-body">
 
-                <h2 class="text-center mb-4">
-                    Registro de Proveedor
-                </h2>
+                    <h2 class="text-center mb-4">
 
-                <div class="mb-3">
+                        {% if editar %}
+                            Editar Proveedor
+                        {% else %}
+                            Agregar Proveedor
+                        {% endif %}
 
-                    {{ form.empresa.label(class="form-label") }}
+                    </h2>
 
-                    {{ form.empresa(
-                        class="form-control",
-                        placeholder="Ingrese el nombre de la empresa"
-                    ) }}
+                    <form method="POST">
 
-                    {% for error in form.empresa.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                        {{ form.hidden_tag() }}
+
+
+                        <!-- NOMBRE DE LA EMPRESA -->
+
+                        <div class="mb-3">
+
+                            {{ form.nombre.label(class="form-label") }}
+
+                            {{ form.nombre(
+                                class="form-control",
+                                placeholder="Ingrese el nombre de la empresa"
+                            ) }}
+
+                            {% for error in form.nombre.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
 
-                </div>
 
-                <div class="mb-3">
+                        <!-- CORREO -->
 
-                    {{ form.contacto.label(class="form-label") }}
+                        <div class="mb-3">
 
-                    {{ form.contacto(
-                        class="form-control",
-                        placeholder="Ingrese la persona de contacto"
-                    ) }}
+                            {{ form.correo.label(class="form-label") }}
 
-                    {% for error in form.contacto.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                            {{ form.correo(
+                                class="form-control",
+                                placeholder="Ingrese el correo electrónico"
+                            ) }}
+
+                            {% for error in form.correo.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
 
-                </div>
 
-                <div class="mb-3">
+                        <!-- TELÉFONO -->
 
-                    {{ form.correo.label(class="form-label") }}
+                        <div class="mb-3">
 
-                    {{ form.correo(
-                        class="form-control",
-                        placeholder="Ingrese el correo electrónico"
-                    ) }}
+                            {{ form.telefono.label(class="form-label") }}
 
-                    {% for error in form.correo.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                            {{ form.telefono(
+                                class="form-control",
+                                placeholder="Ingrese el teléfono",
+                                maxlength="15"
+                            ) }}
+
+                            {% for error in form.telefono.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
 
-                </div>
 
-                <div class="mb-3">
+                        <!-- BOTONES -->
 
-                    {{ form.telefono.label(class="form-label") }}
+                        <div class="d-flex justify-content-between">
 
-                    {{ form.telefono(
-                        class="form-control",
-                        placeholder="Ingrese el teléfono"
-                    ) }}
+                            <a
+                                href="{{ url_for('proveedores') }}"
+                                class="btn btn-secondary">
+                                Cancelar
+                            </a>
 
-                    {% for error in form.telefono.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                {% if editar %}
+                                    Guardar cambios
+                                {% else %}
+                                    Registrar proveedor
+                                {% endif %}
+
+                            </button>
+
                         </div>
-                    {% endfor %}
+
+                    </form>
 
                 </div>
 
-                {{ form.submit(class="btn btn-success w-100") }}
-
-            </form>
-
-            {% if proveedor %}
-
-                <div class="alert alert-success mt-4">
-
-                    <h4>Proveedor registrado correctamente</h4>
-
-                    <p class="mb-1">
-                        <strong>Empresa:</strong>
-                        {{ proveedor.empresa }}
-                    </p>
-
-                    <p class="mb-1">
-                        <strong>Contacto:</strong>
-                        {{ proveedor.contacto }}
-                    </p>
-
-                    <p class="mb-1">
-                        <strong>Correo:</strong>
-                        {{ proveedor.correo }}
-                    </p>
-
-                    <p class="mb-0">
-                        <strong>Teléfono:</strong>
-                        {{ proveedor.telefono }}
-                    </p>
-
-                </div>
-
-            {% endif %}
+            </div>
 
         </div>
 

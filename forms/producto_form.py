@@ -1,6 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import (
+    StringField,
+    TextAreaField,
+    DecimalField,
+    IntegerField,
+    SelectField
+)
+from wtforms.validators import (
+    DataRequired,
+    Length,
+    NumberRange
+)
 
 
 class ProductoForm(FlaskForm):
@@ -8,7 +18,9 @@ class ProductoForm(FlaskForm):
     nombre = StringField(
         "Nombre del producto",
         validators=[
-            DataRequired(message="El nombre es obligatorio."),
+            DataRequired(
+                message="El nombre es obligatorio."
+            ),
             Length(
                 min=3,
                 max=100,
@@ -20,7 +32,9 @@ class ProductoForm(FlaskForm):
     descripcion = TextAreaField(
         "Descripción",
         validators=[
-            DataRequired(message="La descripción es obligatoria."),
+            DataRequired(
+                message="La descripción es obligatoria."
+            ),
             Length(
                 min=10,
                 max=300,
@@ -29,4 +43,39 @@ class ProductoForm(FlaskForm):
         ]
     )
 
-    submit = SubmitField("Registrar Producto")
+    precio = DecimalField(
+        "Precio",
+        places=2,
+        validators=[
+            DataRequired(
+                message="El precio es obligatorio."
+            ),
+            NumberRange(
+                min=0,
+                message="El precio no puede ser negativo."
+            )
+        ]
+    )
+
+    stock = IntegerField(
+        "Stock",
+        validators=[
+            DataRequired(
+                message="El stock es obligatorio."
+            ),
+            NumberRange(
+                min=0,
+                message="El stock debe ser un número entero igual o mayor que 0."
+            )
+        ]
+    )
+
+    id_proveedor = SelectField(
+        "Proveedor",
+        coerce=int,
+        validators=[
+            DataRequired(
+                message="Debe seleccionar un proveedor."
+            )
+        ]
+    )

@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-Formulario de Cliente - IMPORDYCOM S.A.
+{% if editar %}
+Editar Cliente
+{% else %}
+Agregar Cliente
+{% endif %}
+- IMPORDYCOM S.A.
 {% endblock %}
 
 {% block content %}
@@ -10,95 +15,145 @@ Formulario de Cliente - IMPORDYCOM S.A.
 
     <div class="row justify-content-center">
 
-        <div class="col-lg-7">
+        <div class="col-lg-6">
 
-            <form method="POST" class="shadow">
+            <div class="card shadow">
 
-                {{ form.hidden_tag() }}
+                <div class="card-body">
 
-                <h2 class="text-center mb-4">
-                    Registro de Cliente
-                </h2>
+                    <h2 class="text-center mb-4">
 
-                <div class="mb-3">
+                        {% if editar %}
+                            Editar Cliente
+                        {% else %}
+                            Agregar Cliente
+                        {% endif %}
 
-                    {{ form.nombre.label(class="form-label") }}
+                    </h2>
 
-                    {{ form.nombre(
-                        class="form-control",
-                        placeholder="Ingrese el nombre del cliente"
-                    ) }}
+                    <form method="POST">
 
-                    {% for error in form.nombre.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                        {{ form.hidden_tag() }}
+
+                        <!-- NOMBRE -->
+
+                        <div class="mb-3">
+
+                            {{ form.nombre.label(class="form-label") }}
+
+                            {{ form.nombre(
+                                class="form-control",
+                                placeholder="Ingrese el nombre del cliente"
+                            ) }}
+
+                            {% for error in form.nombre.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
 
-                </div>
 
-                <div class="mb-3">
+                        <!-- CÉDULA -->
 
-                    {{ form.correo.label(class="form-label") }}
+                        <div class="mb-3">
 
-                    {{ form.correo(
-                        class="form-control",
-                        placeholder="Ingrese el correo electrónico"
-                    ) }}
+                            {{ form.cedula.label(class="form-label") }}
 
-                    {% for error in form.correo.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                            {{ form.cedula(
+                                class="form-control",
+                                placeholder="Ingrese la cédula",
+                                maxlength="10"
+                            ) }}
+
+                            {% for error in form.cedula.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
 
-                </div>
 
-                <div class="mb-3">
+                        <!-- CORREO -->
 
-                    {{ form.telefono.label(class="form-label") }}
+                        <div class="mb-3">
 
-                    {{ form.telefono(
-                        class="form-control",
-                        placeholder="Ingrese el teléfono"
-                    ) }}
+                            {{ form.correo.label(class="form-label") }}
 
-                    {% for error in form.telefono.errors %}
-                        <div class="text-danger mt-1">
-                            {{ error }}
+                            {{ form.correo(
+                                class="form-control",
+                                placeholder="Ingrese el correo electrónico"
+                            ) }}
+
+                            {% for error in form.correo.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
                         </div>
-                    {% endfor %}
+
+
+                        <!-- TELÉFONO -->
+
+                        <div class="mb-3">
+
+                            {{ form.telefono.label(class="form-label") }}
+
+                            {{ form.telefono(
+                                class="form-control",
+                                placeholder="Ingrese el teléfono",
+                                maxlength="15"
+                            ) }}
+
+                            {% for error in form.telefono.errors %}
+
+                                <div class="text-danger small mt-1">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- BOTONES -->
+
+                        <div class="d-flex justify-content-between">
+
+                            <a
+                                href="{{ url_for('clientes') }}"
+                                class="btn btn-secondary">
+                                Cancelar
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                {% if editar %}
+                                    Guardar cambios
+                                {% else %}
+                                    Registrar cliente
+                                {% endif %}
+
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
-                {{ form.submit(class="btn btn-success w-100") }}
-
-            </form>
-
-            {% if cliente %}
-
-                <div class="alert alert-success mt-4">
-
-                    <h4>Cliente registrado correctamente</h4>
-
-                    <p class="mb-1">
-                        <strong>Nombre:</strong>
-                        {{ cliente.nombre }}
-                    </p>
-
-                    <p class="mb-1">
-                        <strong>Correo:</strong>
-                        {{ cliente.correo }}
-                    </p>
-
-                    <p class="mb-0">
-                        <strong>Teléfono:</strong>
-                        {{ cliente.telefono }}
-                    </p>
-
-                </div>
-
-            {% endif %}
+            </div>
 
         </div>
 
