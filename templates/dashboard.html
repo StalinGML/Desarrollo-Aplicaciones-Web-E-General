@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+        <div class="card-body text-center">
+
+            <h1 class="mb-3">
+                Bienvenido
+            </h1>
+
+            <p class="lead">
+                Has iniciado sesión como:
+                <strong>{{ current_user.usuario }}</strong>
+            </p>
+
+            <p class="mb-4">
+                Puedes utilizar el menú de navegación para acceder
+                a las diferentes funcionalidades del sistema.
+            </p>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
