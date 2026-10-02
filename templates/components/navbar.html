@@ -1,113 +1,326 @@
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<!-- =====================================================
+     NAVBAR PRINCIPAL
+====================================================== -->
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
     <div class="container">
 
-        <a class="navbar-brand" href="{{ url_for('inicio') }}">
-            IMPORDYCOM S.A.
+
+        <!-- MARCA -->
+
+        <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="{{ url_for('inicio') }}">
+
+            <i class="bi bi-building"></i>
+
+            <span>
+                IMPORDYCOM
+            </span>
+
         </a>
+
+
+        <!-- BOTÓN RESPONSIVE -->
 
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#menu">
+            data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal"
+            aria-expanded="false"
+            aria-label="Mostrar navegación">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
-        <div class="collapse navbar-collapse" id="menu">
 
-            <ul class="navbar-nav ms-auto">
+        <!-- MENÚ -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="menuPrincipal">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+
+
+                <!-- =========================
+                     OPCIONES PÚBLICAS
+                ========================== -->
+
+
+                <!-- INICIO -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('inicio') }}">
+
+                    <a
+                        class="nav-link"
+                        href="{{ url_for('inicio') }}">
+
+                        <i class="bi bi-house-door me-1"></i>
+
                         Inicio
+
                     </a>
+
                 </li>
 
+
+                <!-- QUIÉNES SOMOS -->
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('inicio') }}#quienes">
+
+                    <a
+                        class="nav-link"
+                        href="{{ url_for('inicio') }}#quienes">
+
+                        <i class="bi bi-building me-1"></i>
+
                         Quiénes Somos
+
                     </a>
+
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('productos') }}">
-                        Productos
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('clientes') }}">
-                        Clientes
-                    </a>
-                </li>
+                {% if current_user.is_authenticated %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('proveedores') }}">
-                        Proveedores
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('facturacion') }}">
-                        Facturación
-                    </a>
-                </li>
+                    <!-- =========================
+                         OPCIONES ADMINISTRATIVAS
+                    ========================== -->
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('inicio') }}#cotizacion">
-                        Cotizaciones
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('inicio') }}#contacto">
-                        Contacto
-                    </a>
-                </li>
+                    <!-- PRODUCTOS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('productos') }}">
+
+                            <i class="bi bi-box-seam me-1"></i>
+
+                            Productos
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- CLIENTES -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('clientes') }}">
+
+                            <i class="bi bi-people me-1"></i>
+
+                            Clientes
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- PROVEEDORES -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('proveedores') }}">
+
+                            <i class="bi bi-truck me-1"></i>
+
+                            Proveedores
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- FACTURACIÓN -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('facturacion') }}">
+
+                            <i class="bi bi-receipt me-1"></i>
+
+                            Facturación
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- COTIZACIONES -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('inicio') }}#cotizacion">
+
+                            <i class="bi bi-file-earmark-text me-1"></i>
+
+                            Cotizaciones
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- CONTACTO -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('inicio') }}#contacto">
+
+                            <i class="bi bi-envelope me-1"></i>
+
+                            Contacto
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =========================
+                         USUARIO / CERRAR SESIÓN
+                    ========================== -->
+
+                    <li class="nav-item dropdown ms-lg-2">
+
+                        <a
+                            class="btn btn-outline-light btn-sm px-3 dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <i class="bi bi-person-circle me-1"></i>
+
+                            {{ current_user.usuario }}
+
+                        </a>
+
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li>
+
+                                <span class="dropdown-item-text">
+
+                                    <i class="bi bi-person me-1"></i>
+
+                                    Usuario:
+                                    <strong>
+                                        {{ current_user.usuario }}
+                                    </strong>
+
+                                </span>
+
+                            </li>
+
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item text-danger"
+                                    href="{{ url_for('logout') }}">
+
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+
+                                    Cerrar sesión
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                {% else %}
+
+
+                    <!-- =========================
+                         USUARIO NO AUTENTICADO
+                    ========================== -->
+
+
+                    <!-- CONTACTO -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{{ url_for('inicio') }}#contacto">
+
+                            <i class="bi bi-envelope me-1"></i>
+
+                            Contacto
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- INICIAR SESIÓN -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            class="btn btn-warning btn-sm px-3 fw-semibold"
+                            href="{{ url_for('login') }}">
+
+                            <i class="bi bi-person-circle me-1"></i>
+
+                            Iniciar sesión
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REGISTRARSE -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a
+                            class="btn btn-outline-light btn-sm px-3"
+                            href="{{ url_for('registro') }}">
+
+                            <i class="bi bi-person-plus me-1"></i>
+
+                            Registrarse
+
+                        </a>
+
+                    </li>
+
+
+                {% endif %}
+
 
             </ul>
-
-            {% if current_user.is_authenticated %}
-
-                <div class="dropdown ms-3">
-
-                    <button
-                        class="btn btn-outline-light btn-sm dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        {{ current_user.usuario }}
-                    </button>
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li>
-                            <span class="dropdown-item-text">
-                                Usuario: <strong>{{ current_user.usuario }}</strong>
-                            </span>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a
-                                class="dropdown-item text-danger"
-                                href="{{ url_for('logout') }}">
-                                Cerrar sesión
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            {% endif %}
 
         </div>
 

@@ -6,323 +6,300 @@ Facturación - IMPORDYCOM S.A.
 
 {% block content %}
 
-<section class="my-5">
+<section class="admin-section facturacion-section">
 
-<div class="container">
+<!-- ============================== -->
+<!-- ENCABEZADO -->
+<!-- ============================== -->
 
-    <!-- ENCABEZADO -->
+<div class="admin-section-header">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
 
-        <div>
-            <h2 class="mb-1">
-                Gestión de Facturación
-            </h2>
+        <span class="section-kicker">
+            ADMINISTRACIÓN
+        </span>
 
-            <p class="text-muted mb-0">
-                Registro y consulta de facturas
-            </p>
-        </div>
+        <h2>
+            Gestión de Facturación
+        </h2>
 
-        <a
-            href="{{ url_for('formulario_facturacion') }}"
-            class="btn btn-success">
-
-            + Registrar factura
-
-        </a>
+        <p>
+            Registre, consulte y administre las facturas generadas
+            en el sistema.
+        </p>
 
     </div>
 
 
-    <!-- FACTURAS REGISTRADAS -->
+    <a
+        href="{{ url_for('formulario_facturacion') }}"
+        class="btn btn-primary modern-btn">
 
-    <div class="card shadow">
+        <i class="bi bi-receipt me-2"></i>
+        Registrar factura
 
-        <div class="card-body">
+    </a>
 
-            <h4 class="mb-4">
+</div>
+
+
+<!-- ============================== -->
+<!-- FACTURAS REGISTRADAS -->
+<!-- ============================== -->
+
+<div class="invoice-card">
+
+    <div class="invoice-card-header">
+
+        <div>
+
+            <h4>
                 Facturas registradas
             </h4>
 
+            <p>
+                Consulte el detalle y estado de las facturas.
+            </p>
 
-            {% if facturas_db %}
+        </div>
 
-                <div class="table-responsive">
+        <div class="invoice-header-icon">
+            <i class="bi bi-file-earmark-text"></i>
+        </div>
 
-                    <table class="table table-bordered table-hover align-middle">
+    </div>
 
-                        <thead class="table-dark">
+
+    {% if facturas_db %}
+
+        <div class="admin-table-card invoice-table-card">
+
+            <div class="table-responsive">
+
+                <table class="table modern-table invoice-table align-middle mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>N.º Factura</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Subtotal</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for factura in facturas_db %}
 
                             <tr>
 
-                                <th>
-                                    N.º Factura
-                                </th>
+                                <!-- NÚMERO DE FACTURA -->
 
-                                <th>
-                                    Cliente
-                                </th>
+                                <td>
 
-                                <th>
-                                    Producto
-                                </th>
+                                    <span class="invoice-number">
+                                        {{ factura[1] }}
+                                    </span>
 
-                                <th>
-                                    Cantidad
-                                </th>
-
-                                <th>
-                                    Precio unitario
-                                </th>
-
-                                <th>
-                                    Subtotal
-                                </th>
-
-                                <th>
-                                    Fecha
-                                </th>
-
-                                <th>
-                                    Total
-                                </th>
-
-                                <th>
-                                    Estado
-                                </th>
-
-                                <th>
-                                    Acciones
-                                </th>
-
-                            </tr>
-
-                        </thead>
+                                </td>
 
 
-                        <tbody>
+                                <!-- CLIENTE -->
 
-                            {% for factura in facturas_db %}
+                                <td>
 
-                                <tr>
-
-                                    <!-- NÚMERO DE FACTURA -->
-
-                                    <td>
-                                        <strong>
-                                            {{ factura[1] }}
-                                        </strong>
-                                    </td>
-
-
-                                    <!-- CLIENTE -->
-
-                                    <td>
+                                    <strong>
                                         {{ factura[2] }}
-                                    </td>
+                                    </strong>
+
+                                </td>
 
 
-                                    <!-- PRODUCTO -->
+                                <!-- PRODUCTO -->
 
-                                    <td>
-                                        {{ factura[3] }}
-                                    </td>
-
-
-                                    <!-- CANTIDAD -->
-
-                                    <td>
-                                        {{ factura[4] }}
-                                    </td>
+                                <td>
+                                    {{ factura[3] }}
+                                </td>
 
 
-                                    <!-- PRECIO -->
+                                <!-- CANTIDAD -->
 
-                                    <td>
-                                        ${{ "%.2f"|format(factura[5]) }}
-                                    </td>
-
-
-                                    <!-- SUBTOTAL -->
-
-                                    <td>
-                                        ${{ "%.2f"|format(factura[6]) }}
-                                    </td>
+                                <td class="text-center">
+                                    {{ factura[4] }}
+                                </td>
 
 
-                                    <!-- FECHA -->
+                                <!-- PRECIO -->
 
-                                    <td>
+                                <td>
+                                    ${{ "%.2f"|format(factura[5]) }}
+                                </td>
+
+
+                                <!-- SUBTOTAL -->
+
+                                <td>
+                                    ${{ "%.2f"|format(factura[6]) }}
+                                </td>
+
+
+                                <!-- FECHA -->
+
+                                <td>
+                                    <span class="invoice-date">
+                                        <i class="bi bi-calendar3 me-1"></i>
                                         {{ factura[7] }}
-                                    </td>
+                                    </span>
+                                </td>
 
 
-                                    <!-- TOTAL -->
+                                <!-- TOTAL -->
 
-                                    <td>
-                                        <strong>
-                                            ${{ "%.2f"|format(factura[8]) }}
-                                        </strong>
-                                    </td>
+                                <td>
+
+                                    <strong class="invoice-total">
+                                        ${{ "%.2f"|format(factura[8]) }}
+                                    </strong>
+
+                                </td>
 
 
-                                    <!-- ESTADO -->
+                                <!-- ESTADO -->
 
-                                    <td class="text-center">
+                                <td class="text-center">
+
+                                    {% if factura[9] == "ACTIVA" %}
+
+                                        <span class="invoice-status status-active">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            ACTIVA
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="invoice-status status-cancelled">
+                                            <i class="bi bi-x-circle me-1"></i>
+                                            ANULADA
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <!-- ACCIONES -->
+
+                                <td class="text-center">
+
+                                    <div class="invoice-actions">
+
+                                        <!-- DESCARGAR PDF -->
+
+                                        <a
+                                            href="{{ url_for('descargar_factura', id=factura[0]) }}"
+                                            class="invoice-action invoice-pdf"
+                                            title="Descargar PDF"
+                                            aria-label="Descargar PDF">
+
+                                            <i class="bi bi-file-earmark-pdf"></i>
+
+                                        </a>
+
 
                                         {% if factura[9] == "ACTIVA" %}
 
-                                            <span class="badge bg-success">
-                                                ACTIVA
-                                            </span>
-
-                                        {% else %}
-
-                                            <span class="badge bg-danger">
-                                                ANULADA
-                                            </span>
-
-                                        {% endif %}
-
-                                    </td>
-
-
-                                    <!-- ACCIONES -->
-
-                                    <td class="text-center">
-
-                                        <div class="acciones-factura">
-
-                                            <!-- DESCARGAR PDF -->
+                                            <!-- EDITAR -->
 
                                             <a
-                                                href="{{ url_for('descargar_factura', id=factura[0]) }}"
-                                                class="btn btn-primary btn-sm boton-accion"
-                                                title="Descargar PDF">
+                                                href="{{ url_for('editar_factura', id=factura[0]) }}"
+                                                class="invoice-action invoice-edit"
+                                                title="Editar factura"
+                                                aria-label="Editar factura">
 
-                                                <span class="icono-accion">📄</span>
+                                                <i class="bi bi-pencil-square"></i>
 
                                             </a>
 
 
-                                            {% if factura[9] == "ACTIVA" %}
+                                            <!-- ANULAR -->
 
-                                                <!-- EDITAR -->
+                                            <form
+                                                action="{{ url_for('anular_factura', id=factura[0]) }}"
+                                                method="POST"
+                                                class="invoice-cancel-form"
+                                                onsubmit="return confirm('¿Está seguro de anular esta factura? El stock será devuelto.');">
 
-                                                <a
-                                                    href="{{ url_for('editar_factura', id=factura[0]) }}"
-                                                    class="btn btn-warning btn-sm boton-accion"
-                                                    title="Editar factura">
+                                                <button
+                                                    type="submit"
+                                                    class="invoice-action invoice-cancel"
+                                                    title="Anular factura"
+                                                    aria-label="Anular factura">
 
-                                                    <span class="icono-accion">✏️</span>
+                                                    <i class="bi bi-x-circle"></i>
 
-                                                </a>
+                                                </button>
 
+                                            </form>
 
-                                                <!-- ANULAR -->
+                                        {% endif %}
 
-                                                <form
-                                                    action="{{ url_for('anular_factura', id=factura[0]) }}"
-                                                    method="POST"
-                                                    class="form-anular"
-                                                    onsubmit="return confirm('¿Está seguro de anular esta factura? El stock será devuelto.');">
+                                    </div>
 
-                                                    <button
-                                                        type="submit"
-                                                        class="btn btn-danger btn-sm boton-accion"
-                                                        title="Anular factura">
+                                </td>
 
-                                                        <span class="icono-accion">🚫</span>
+                            </tr>
 
-                                                    </button>
+                        {% endfor %}
 
-                                                </form>
+                    </tbody>
 
-                                            {% endif %}
+                </table>
 
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                            {% endfor %}
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            {% else %}
-
-                <div class="alert alert-info text-center mb-0">
-
-                    No existen facturas registradas.
-
-                </div>
-
-            {% endif %}
+            </div>
 
         </div>
 
-    </div>
+    {% else %}
+
+        <div class="invoice-empty">
+
+            <i class="bi bi-receipt"></i>
+
+            <h5>
+                No existen facturas registradas
+            </h5>
+
+            <p>
+                Las facturas generadas aparecerán aquí.
+            </p>
+
+            <a
+                href="{{ url_for('formulario_facturacion') }}"
+                class="btn btn-primary modern-btn">
+
+                <i class="bi bi-plus-lg me-2"></i>
+                Registrar primera factura
+
+            </a>
+
+        </div>
+
+    {% endif %}
 
 </div>
 
 </section>
-
-<!-- ESTILOS DE LOS BOTONES -->
-
-<style>
-
-    /* CONTENEDOR DE LOS BOTONES */
-
-    .acciones-factura {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-    }
-
-
-    /* FORMULARIO DE ANULAR */
-
-    .form-anular {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-    }
-
-
-    /* BOTONES */
-
-    .boton-accion {
-        width: 34px;
-        height: 32px;
-        padding: 0;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        line-height: 1;
-        vertical-align: middle;
-    }
-
-
-    /* EMOJIS */
-
-    .icono-accion {
-        font-size: 14px;
-        line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-</style>
 
 {% endblock %}

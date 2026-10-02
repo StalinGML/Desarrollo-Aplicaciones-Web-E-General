@@ -17,7 +17,7 @@ from models import Usuario
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.platypus import (
     SimpleDocTemplate,
     Paragraph,
@@ -626,7 +626,6 @@ def clientes():
         clientes_db=clientes_db
     )
 
-
 # ==============================
 # AGREGAR CLIENTE
 # ==============================
@@ -641,6 +640,30 @@ def formulario_cliente():
 
         conexion = obtener_conexion()
         cursor = conexion.cursor()
+
+        cursor.execute(
+            """
+            SELECT id_cliente
+            FROM clientes
+            WHERE cedula = %s
+            """,
+            (form.cedula.data,)
+        )
+
+        if cursor.fetchone() is not None:
+
+            form.cedula.errors.append(
+                "La cédula ya está registrada."
+            )
+
+            cursor.close()
+            conexion.close()
+
+            return render_template(
+                "formulario_cliente.html",
+                form=form,
+                editar=False
+            )
 
         cursor.execute(
             """
@@ -668,7 +691,6 @@ def formulario_cliente():
         form=form,
         editar=False
     )
-
 
 # ==============================
 # EDITAR CLIENTE
@@ -716,6 +738,34 @@ def editar_cliente(id):
 
         conexion = obtener_conexion()
         cursor = conexion.cursor()
+
+        cursor.execute(
+            """
+            SELECT id_cliente
+            FROM clientes
+            WHERE cedula = %s
+            AND id_cliente <> %s
+            """,
+            (
+                form.cedula.data,
+                id
+            )
+        )
+
+        if cursor.fetchone() is not None:
+
+            form.cedula.errors.append(
+                "La cédula ya está registrada para otro cliente."
+            )
+
+            cursor.close()
+            conexion.close()
+
+            return render_template(
+                "formulario_cliente.html",
+                form=form,
+                editar=True
+            )
 
         cursor.execute(
             """
@@ -1772,7 +1822,6 @@ def anular_factura(id):
 
     return redirect("/facturacion")
 
-
 # ==============================
 # DESCARGAR FACTURA EN PDF
 # ==============================
@@ -1819,15 +1868,12 @@ def descargar_factura(id):
     cursor.close()
     conexion.close()
 
-
     # ==========================================
     # VERIFICAR FACTURA
     # ==========================================
 
     if factura is None:
-
         return "Factura no encontrada", 404
-
 
     (
         numero_factura,
@@ -1843,9 +1889,8 @@ def descargar_factura(id):
         total
     ) = factura
 
-
     # ==========================================
-    # CREAR PDF EN MEMORIA
+    # CREAR PDF
     # ==========================================
 
     pdf_buffer = BytesIO()
@@ -1853,23 +1898,78 @@ def descargar_factura(id):
     documento = SimpleDocTemplate(
         pdf_buffer,
         pagesize=A4,
-        rightMargin=40,
-        leftMargin=40,
-        topMargin=40,
-        bottomMargin=40
+        rightMargin=45,
+        leftMargin=45,
+        topMargin=45,
+        bottomMargin=60
     )
-
 
     estilos = getSampleStyleSheet()
 
+    # ==========================================
+    # COLORES
+    # ==========================================
+
+    color_oscuro = colors.HexColor("#111827")
+    color_gris = colors.HexColor("#6B7280")
+    color_texto = colors.HexColor("#374151")
+    color_claro = colors.HexColor("#F3F4F6")
+    color_borde = colors.HexColor("#D9DEE5")
+    color_amarillo = colors.HexColor("#F59E0B")
+    color_amarillo_claro = colors.HexColor("#FEF3C7")
+    color_blanco = colors.white
+
+    # ==========================================
+    # ESTILOS
+    # ==========================================
+
     estilo_titulo = estilos["Title"]
-    estilo_titulo.alignment = TA_CENTER
+    estilo_titulo.alignment = TA_LEFT
+    estilo_titulo.fontName = "Helvetica-Bold"
+    estilo_titulo.fontSize = 19
+    estilo_titulo.leading = 22
+    estilo_titulo.textColor = color_oscuro
+
+    estilo_subtitulo = estilos["Normal"]
+    estilo_subtitulo.fontName = "Helvetica"
+    estilo_subtitulo.fontSize = 8.5
+    estilo_subtitulo.leading = 11
+    estilo_subtitulo.textColor = color_gris
+
+    estilo_seccion = estilos["Heading3"]
+    estilo_seccion.fontName = "Helvetica-Bold"
+    estilo_seccion.fontSize = 10.5
+    estilo_seccion.leading = 13
+    estilo_seccion.textColor = color_oscuro
 
     estilo_normal = estilos["Normal"]
+    estilo_normal.fontName = "Helvetica"
+    estilo_normal.fontSize = 8.5
+    estilo_normal.leading = 11
+    estilo_normal.textColor = color_texto
 
+    estilo_centro = estilos["Normal"]
+    estilo_centro.fontName = "Helvetica"
+    estilo_centro.fontSize = 8.5
+    estilo_centro.leading = 11
+    estilo_centro.alignment = TA_CENTER
+    estilo_centro.textColor = color_texto
+
+    estilo_derecha = estilos["Normal"]
+    estilo_derecha.fontName = "Helvetica"
+    estilo_derecha.fontSize = 8.5
+    estilo_derecha.leading = 11
+    estilo_derecha.alignment = TA_RIGHT
+    estilo_derecha.textColor = color_texto
+
+    estilo_final = estilos["Normal"]
+    estilo_final.alignment = TA_CENTER
+    estilo_final.fontName = "Helvetica"
+    estilo_final.fontSize = 8
+    estilo_final.leading = 11
+    estilo_final.textColor = color_gris
 
     contenido = []
-
 
     # ==========================================
     # ENCABEZADO
@@ -1884,85 +1984,134 @@ def descargar_factura(id):
 
     logo = Image(
         ruta_logo,
-        width=80,
-        height=60
+        width=82,
+        height=58
     )
 
-    contenido.append(logo)
-
-    contenido.append(
-        Spacer(1, 8)
-    )
-
-    contenido.append(
+    empresa = [
         Paragraph(
             "IMPORDYCOM S.A.",
             estilo_titulo
-        )
-    )
-
-    contenido.append(
+        ),
+        Spacer(1, 2),
         Paragraph(
-            "Importadora y Distribuidora de Materiales",
-            estilo_normal
+            "Importadora y distribuidora de materiales<br/>"
+            "de acero inoxidable",
+            estilo_subtitulo
+        ),
+        Spacer(1, 3),
+        Paragraph(
+            "Kennedy Norte, Guayaquil - Ecuador",
+            estilo_subtitulo
         )
-    )
-
-    contenido.append(
-        Spacer(1, 15)
-    )
-
-
-    # ==========================================
-    # INFORMACIÓN DE LA FACTURA
-    # ==========================================
-
-    informacion_factura = [
-        ["N.º Factura", numero_factura],
-        ["Fecha", str(fecha)],
     ]
 
-    tabla_factura = Table(
-        informacion_factura,
-        colWidths=[120, 350]
+    documento_info = [
+        Paragraph(
+            "<font color='#6B7280' size='7'>FACTURA</font>",
+            estilo_derecha
+        ),
+        Spacer(1, 2),
+        Paragraph(
+            f"<font color='#111827' size='12'><b>{numero_factura}</b></font>",
+            estilo_derecha
+        ),
+        Spacer(1, 4),
+        Paragraph(
+            "<font color='#6B7280' size='7'>FECHA</font>",
+            estilo_derecha
+        ),
+        Spacer(1, 2),
+        Paragraph(
+            f"<font color='#111827' size='8.5'><b>{fecha}</b></font>",
+            estilo_derecha
+        )
+    ]
+
+    encabezado = Table(
+        [
+            [
+                logo,
+                empresa,
+                documento_info
+            ]
+        ],
+        colWidths=[85, 285, 105]
     )
 
-    tabla_factura.setStyle(
+    encabezado.setStyle(
         TableStyle([
-            (
-                "BACKGROUND",
-                (0, 0),
-                (0, -1),
-                colors.lightgrey
-            ),
-            (
-                "FONTNAME",
-                (0, 0),
-                (0, -1),
-                "Helvetica-Bold"
-            ),
-            (
-                "GRID",
-                (0, 0),
-                (-1, -1),
-                0.5,
-                colors.grey
-            ),
             (
                 "VALIGN",
                 (0, 0),
                 (-1, -1),
                 "MIDDLE"
             ),
+            (
+                "ALIGN",
+                (2, 0),
+                (2, 0),
+                "RIGHT"
+            ),
+            (
+                "LEFTPADDING",
+                (0, 0),
+                (-1, -1),
+                0
+            ),
+            (
+                "RIGHTPADDING",
+                (0, 0),
+                (-1, -1),
+                0
+            ),
+            (
+                "TOPPADDING",
+                (0, 0),
+                (-1, -1),
+                0
+            ),
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                0
+            ),
         ])
     )
 
-    contenido.append(tabla_factura)
+    contenido.append(encabezado)
 
     contenido.append(
-        Spacer(1, 15)
+        Spacer(1, 10)
     )
 
+    # ==========================================
+    # LÍNEA DECORATIVA
+    # ==========================================
+
+    linea = Table(
+        [[""]],
+        colWidths=[475],
+        rowHeights=[4]
+    )
+
+    linea.setStyle(
+        TableStyle([
+            (
+                "BACKGROUND",
+                (0, 0),
+                (-1, -1),
+                color_amarillo
+            ),
+        ])
+    )
+
+    contenido.append(linea)
+
+    contenido.append(
+        Spacer(1, 20)
+    )
 
     # ==========================================
     # DATOS DEL CLIENTE
@@ -1970,21 +2119,34 @@ def descargar_factura(id):
 
     contenido.append(
         Paragraph(
-            "<b>Datos del cliente</b>",
-            estilos["Heading3"]
+            "DATOS DEL CLIENTE",
+            estilo_seccion
         )
     )
 
+    contenido.append(
+        Spacer(1, 7)
+    )
+
     datos_cliente = [
-        ["Cliente", cliente],
-        ["Cédula", cedula],
-        ["Correo", correo],
-        ["Teléfono", telefono],
+        [
+            Paragraph("<b>Cliente</b>", estilo_normal),
+            Paragraph(str(cliente), estilo_normal),
+            Paragraph("<b>Cédula</b>", estilo_normal),
+            Paragraph(str(cedula), estilo_normal)
+        ],
+        [
+            Paragraph("<b>Correo</b>", estilo_normal),
+            Paragraph(str(correo), estilo_normal),
+            Paragraph("<b>Teléfono</b>", estilo_normal),
+            Paragraph(str(telefono), estilo_normal)
+        ]
     ]
 
     tabla_cliente = Table(
         datos_cliente,
-        colWidths=[120, 350]
+        colWidths=[65, 185, 65, 160],
+        rowHeights=[30, 30]
     )
 
     tabla_cliente.setStyle(
@@ -1992,21 +2154,52 @@ def descargar_factura(id):
             (
                 "BACKGROUND",
                 (0, 0),
-                (0, -1),
-                colors.lightgrey
+                (-1, -1),
+                color_claro
             ),
             (
-                "FONTNAME",
-                (0, 0),
-                (0, -1),
-                "Helvetica-Bold"
-            ),
-            (
-                "GRID",
+                "BOX",
                 (0, 0),
                 (-1, -1),
-                0.5,
-                colors.grey
+                0.6,
+                color_borde
+            ),
+            (
+                "INNERGRID",
+                (0, 0),
+                (-1, -1),
+                0.4,
+                color_borde
+            ),
+            (
+                "VALIGN",
+                (0, 0),
+                (-1, -1),
+                "MIDDLE"
+            ),
+            (
+                "LEFTPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            ),
+            (
+                "RIGHTPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            ),
+            (
+                "TOPPADDING",
+                (0, 0),
+                (-1, -1),
+                6
+            ),
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                6
             ),
         ])
     )
@@ -2014,39 +2207,43 @@ def descargar_factura(id):
     contenido.append(tabla_cliente)
 
     contenido.append(
-        Spacer(1, 20)
+        Spacer(1, 22)
     )
 
-
     # ==========================================
-    # DETALLE DE PRODUCTO
+    # DETALLE DE LA FACTURA
     # ==========================================
 
     contenido.append(
         Paragraph(
-            "<b>Detalle de la factura</b>",
-            estilos["Heading3"]
+            "DETALLE DE LA FACTURA",
+            estilo_seccion
         )
+    )
+
+    contenido.append(
+        Spacer(1, 7)
     )
 
     detalle = [
         [
-            "Producto",
-            "Cantidad",
-            "Precio unitario",
-            "Subtotal"
+            Paragraph("<b>Producto</b>", estilo_centro),
+            Paragraph("<b>Cantidad</b>", estilo_centro),
+            Paragraph("<b>Precio unitario</b>", estilo_centro),
+            Paragraph("<b>Subtotal</b>", estilo_centro)
         ],
         [
-            producto,
-            str(cantidad),
-            f"${float(precio):.2f}",
-            f"${float(subtotal):.2f}"
+            Paragraph(str(producto), estilo_normal),
+            Paragraph(str(cantidad), estilo_centro),
+            Paragraph(f"${float(precio):.2f}", estilo_derecha),
+            Paragraph(f"${float(subtotal):.2f}", estilo_derecha)
         ]
     ]
 
     tabla_detalle = Table(
         detalle,
-        colWidths=[190, 70, 110, 100]
+        colWidths=[205, 75, 100, 95],
+        rowHeights=[30, 34]
     )
 
     tabla_detalle.setStyle(
@@ -2055,32 +2252,63 @@ def descargar_factura(id):
                 "BACKGROUND",
                 (0, 0),
                 (-1, 0),
-                colors.darkgrey
+                color_oscuro
             ),
             (
                 "TEXTCOLOR",
                 (0, 0),
                 (-1, 0),
-                colors.white
+                color_blanco
             ),
             (
-                "FONTNAME",
-                (0, 0),
-                (-1, 0),
-                "Helvetica-Bold"
-            ),
-            (
-                "GRID",
+                "VALIGN",
                 (0, 0),
                 (-1, -1),
-                0.5,
-                colors.grey
+                "MIDDLE"
             ),
             (
                 "ALIGN",
-                (1, 1),
-                (-1, -1),
+                (0, 0),
+                (-1, 0),
                 "CENTER"
+            ),
+            (
+                "BOX",
+                (0, 0),
+                (-1, -1),
+                0.6,
+                color_borde
+            ),
+            (
+                "INNERGRID",
+                (0, 0),
+                (-1, -1),
+                0.4,
+                color_borde
+            ),
+            (
+                "LEFTPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            ),
+            (
+                "RIGHTPADDING",
+                (0, 0),
+                (-1, -1),
+                8
+            ),
+            (
+                "TOPPADDING",
+                (0, 0),
+                (-1, -1),
+                6
+            ),
+            (
+                "BOTTOMPADDING",
+                (0, 0),
+                (-1, -1),
+                6
             ),
         ])
     )
@@ -2088,9 +2316,8 @@ def descargar_factura(id):
     contenido.append(tabla_detalle)
 
     contenido.append(
-        Spacer(1, 20)
+        Spacer(1, 18)
     )
-
 
     # ==========================================
     # TOTAL
@@ -2099,11 +2326,18 @@ def descargar_factura(id):
     tabla_total = Table(
         [
             [
-                "TOTAL",
-                f"${float(total):.2f}"
+                Paragraph(
+                    "<b>TOTAL A PAGAR</b>",
+                    estilo_normal
+                ),
+                Paragraph(
+                    f"<font color='#111827' size='14'><b>${float(total):.2f}</b></font>",
+                    estilo_derecha
+                )
             ]
         ],
-        colWidths=[370, 100]
+        colWidths=[370, 105],
+        rowHeights=[38]
     )
 
     tabla_total.setStyle(
@@ -2111,14 +2345,21 @@ def descargar_factura(id):
             (
                 "BACKGROUND",
                 (0, 0),
-                (0, 0),
-                colors.lightgrey
+                (-1, -1),
+                color_amarillo_claro
             ),
             (
-                "FONTNAME",
+                "BOX",
                 (0, 0),
                 (-1, -1),
-                "Helvetica-Bold"
+                0.8,
+                color_amarillo
+            ),
+            (
+                "VALIGN",
+                (0, 0),
+                (-1, -1),
+                "MIDDLE"
             ),
             (
                 "ALIGN",
@@ -2127,11 +2368,16 @@ def descargar_factura(id):
                 "RIGHT"
             ),
             (
-                "GRID",
+                "LEFTPADDING",
                 (0, 0),
                 (-1, -1),
-                0.5,
-                colors.grey
+                12
+            ),
+            (
+                "RIGHTPADDING",
+                (0, 0),
+                (-1, -1),
+                12
             ),
         ])
     )
@@ -2139,9 +2385,8 @@ def descargar_factura(id):
     contenido.append(tabla_total)
 
     contenido.append(
-        Spacer(1, 30)
+        Spacer(1, 32)
     )
-
 
     # ==========================================
     # MENSAJE FINAL
@@ -2149,20 +2394,76 @@ def descargar_factura(id):
 
     contenido.append(
         Paragraph(
-            "Gracias por su preferencia.",
-            estilo_normal
+            "<b>Gracias por su preferencia.</b>",
+            estilo_final
         )
     )
 
+    contenido.append(
+        Spacer(1, 4)
+    )
+
+    contenido.append(
+        Paragraph(
+            "IMPORDYCOM S.A. · Materiales de acero inoxidable",
+            estilo_final
+        )
+    )
+
+    # ==========================================
+    # PIE DE PÁGINA
+    # ==========================================
+
+    def agregar_pie(canvas, doc):
+
+        canvas.saveState()
+
+        ancho, alto = A4
+
+        canvas.setStrokeColor(color_borde)
+        canvas.setLineWidth(0.5)
+
+        canvas.line(
+            45,
+            35,
+            ancho - 45,
+            35
+        )
+
+        canvas.setFont(
+            "Helvetica",
+            7.5
+        )
+
+        canvas.setFillColor(
+            color_gris
+        )
+
+        canvas.drawString(
+            45,
+            23,
+            "ventas1@impordycom.com  |  0994292304"
+        )
+
+        canvas.drawRightString(
+            ancho - 45,
+            23,
+            f"Página {doc.page}"
+        )
+
+        canvas.restoreState()
 
     # ==========================================
     # GENERAR PDF
     # ==========================================
 
-    documento.build(contenido)
+    documento.build(
+        contenido,
+        onFirstPage=agregar_pie,
+        onLaterPages=agregar_pie
+    )
 
     pdf_buffer.seek(0)
-
 
     # ==========================================
     # DESCARGAR PDF

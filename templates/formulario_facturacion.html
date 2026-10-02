@@ -6,117 +6,171 @@ Formulario de Facturación - IMPORDYCOM S.A.
 
 {% block content %}
 
-<section class="my-5">
+<section class="admin-section form-page-section invoice-form-section">
 
-    <div class="row justify-content-center">
+    <div class="form-page-header">
 
-        <div class="col-lg-7">
+        <div>
 
-            <div class="card shadow">
+            <span class="section-kicker">
+                FACTURACIÓN
+            </span>
 
-                <div class="card-body">
+            <h2>
+                Registro de Facturación
+            </h2>
 
-                    <h2 class="text-center mb-4">
-                        Registro de Facturación
-                    </h2>
+            <p>
+                Registre una nueva factura seleccionando el cliente,
+                producto y cantidad correspondiente.
+            </p>
+
+        </div>
+
+        <div class="form-page-icon invoice-form-icon">
+            <i class="bi bi-receipt"></i>
+        </div>
+
+    </div>
 
 
-                    <!-- MENSAJE DE ERROR -->
+    <div class="form-card-modern">
 
-                    {% if error %}
+        {% if error %}
 
-                        <div class="alert alert-danger">
-                            {{ error }}
+            <div class="invoice-form-alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <div>
+                    <strong>No se pudo registrar la factura</strong>
+
+                    <p>
+                        {{ error }}
+                    </p>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+
+            <!-- CLIENTE -->
+
+            <div class="form-modern-group">
+
+                {{ form.cliente.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-person"></i>
+                    </span>
+
+                    {{ form.cliente(
+                        class="form-select"
+                    ) }}
+
+                </div>
+
+                {% for error in form.cliente.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PRODUCTO -->
+
+            <div class="form-modern-group">
+
+                {{ form.producto.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </span>
+
+                    {{ form.producto(
+                        class="form-select",
+                        id="producto"
+                    ) }}
+
+                </div>
+
+                {% for error in form.producto.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PRECIO Y CANTIDAD -->
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-modern-group">
+
+                        <label
+                            for="precio"
+                            class="form-label">
+
+                            Precio unitario
+
+                        </label>
+
+                        <div class="input-group-modern">
+
+                            <span class="input-group-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
+
+                            <input
+                                type="text"
+                                id="precio"
+                                class="form-control"
+                                value="0.00"
+                                readonly>
+
                         </div>
 
-                    {% endif %}
-
-
-                    <form method="POST">
-
-                        {{ form.hidden_tag() }}
-
-
-                        <!-- CLIENTE -->
-
-                        <div class="mb-3">
-
-                            {{ form.cliente.label(class="form-label") }}
-
-                            {{ form.cliente(
-                                class="form-select"
-                            ) }}
-
-                            {% for error in form.cliente.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
+                        <div class="invoice-field-help">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Se obtiene automáticamente del producto.
                         </div>
 
+                    </div>
 
-                        <!-- PRODUCTO -->
-
-                        <div class="mb-3">
-
-                            {{ form.producto.label(class="form-label") }}
-
-                            {{ form.producto(
-                                class="form-select",
-                                id="producto"
-                            ) }}
-
-                            {% for error in form.producto.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+                </div>
 
 
-                        <!-- PRECIO -->
+                <div class="col-md-6">
 
-                        <div class="mb-3">
+                    <div class="form-modern-group">
 
-                            <label
-                                for="precio"
-                                class="form-label">
-                                Precio unitario
-                            </label>
+                        {{ form.cantidad.label(class="form-label") }}
 
-                            <div class="input-group">
+                        <div class="input-group-modern">
 
-                                <span class="input-group-text">
-                                    $
-                                </span>
-
-                                <input
-                                    type="text"
-                                    id="precio"
-                                    class="form-control"
-                                    value="0.00"
-                                    readonly>
-
-                            </div>
-
-                            <div class="form-text">
-                                El precio se obtiene automáticamente del producto registrado.
-                            </div>
-
-                        </div>
-
-
-                        <!-- CANTIDAD -->
-
-                        <div class="mb-3">
-
-                            {{ form.cantidad.label(class="form-label") }}
+                            <span class="input-group-icon">
+                                <i class="bi bi-123"></i>
+                            </span>
 
                             {{ form.cantidad(
                                 class="form-control",
@@ -125,171 +179,222 @@ Formulario de Facturación - IMPORDYCOM S.A.
                                 placeholder="Ingrese la cantidad"
                             ) }}
 
-                            {% for error in form.cantidad.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
                         </div>
 
+                        {% for error in form.cantidad.errors %}
 
-                        <!-- SUBTOTAL -->
-
-                        <div class="mb-4">
-
-                            <label
-                                for="subtotal"
-                                class="form-label">
-                                Subtotal
-                            </label>
-
-                            <div class="input-group">
-
-                                <span class="input-group-text">
-                                    $
-                                </span>
-
-                                <input
-                                    type="text"
-                                    id="subtotal"
-                                    class="form-control fw-bold"
-                                    value="0.00"
-                                    readonly>
-
+                            <div class="form-error">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
                             </div>
 
-                        </div>
+                        {% endfor %}
 
-
-                        <!-- BOTONES -->
-
-                        <div class="d-flex justify-content-between">
-
-                            <a
-                                href="{{ url_for('facturacion') }}"
-                                class="btn btn-secondary">
-
-                                Cancelar
-
-                            </a>
-
-                            <button
-                                type="submit"
-                                class="btn btn-success">
-
-                                Registrar factura
-
-                            </button>
-
-                        </div>
-
-                    </form>
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- ==========================================
-                 FACTURA REGISTRADA
-                 ========================================== -->
+            <!-- SUBTOTAL -->
 
-            {% if factura %}
+            <div class="invoice-total-box">
 
-                <div class="card shadow mt-4">
+                <div>
 
-                    <div class="card-body">
+                    <span>
+                        Subtotal
+                    </span>
 
-                        <div class="text-center mb-4">
-
-                            <h4 class="text-success">
-                                ✓ Factura registrada correctamente
-                            </h4>
-
-                            <h5 class="mt-3">
-                                {{ factura.numero_factura }}
-                            </h5>
-
-                        </div>
-
-
-                        <!-- DATOS DE LA FACTURA -->
-
-                        <div class="mb-4">
-
-                            <p class="mb-2">
-                                <strong>Cliente:</strong>
-                                {{ factura.cliente }}
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Producto:</strong>
-                                {{ factura.producto }}
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Cantidad:</strong>
-                                {{ factura.cantidad }}
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Precio unitario:</strong>
-                                ${{ "%.2f"|format(factura.precio) }}
-                            </p>
-
-                            <p class="mb-0">
-                                <strong>Total:</strong>
-                                ${{ "%.2f"|format(factura.total) }}
-                            </p>
-
-                        </div>
-
-
-                        <!-- BOTONES DE ACCIÓN -->
-
-                        <div class="d-flex justify-content-center gap-2 flex-wrap">
-
-                            <a
-                                href="{{ url_for('descargar_factura', id=factura.id_factura) }}"
-                                class="btn btn-danger">
-
-                                🧾 Descargar factura PDF
-
-                            </a>
-
-                            <a
-                                href="{{ url_for('facturacion') }}"
-                                class="btn btn-primary">
-
-                                Ver facturas
-
-                            </a>
-
-                        </div>
-
-                    </div>
+                    <small>
+                        Cálculo automático
+                    </small>
 
                 </div>
 
-            {% endif %}
+                <div class="invoice-total-value">
+
+                    <span>$</span>
+
+                    <input
+                        type="text"
+                        id="subtotal"
+                        value="0.00"
+                        readonly>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTONES -->
+
+            <div class="form-actions-modern">
+
+                <a
+                    href="{{ url_for('facturacion') }}"
+                    class="btn btn-outline-secondary form-cancel-btn">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Cancelar
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary form-submit-btn">
+
+                    <i class="bi bi-receipt me-2"></i>
+                    Registrar factura
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- FACTURA REGISTRADA -->
+
+    {% if factura %}
+
+        <div class="invoice-success-card">
+
+            <div class="invoice-success-header">
+
+                <div class="invoice-success-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+
+                <div>
+
+                    <span class="invoice-success-label">
+                        OPERACIÓN COMPLETADA
+                    </span>
+
+                    <h4>
+                        Factura registrada correctamente
+                    </h4>
+
+                    <strong>
+                        {{ factura.numero_factura }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="invoice-success-details">
+
+                <div class="invoice-detail-item">
+
+                    <span>
+                        <i class="bi bi-person me-2"></i>
+                        Cliente
+                    </span>
+
+                    <strong>
+                        {{ factura.cliente }}
+                    </strong>
+
+                </div>
+
+
+                <div class="invoice-detail-item">
+
+                    <span>
+                        <i class="bi bi-box-seam me-2"></i>
+                        Producto
+                    </span>
+
+                    <strong>
+                        {{ factura.producto }}
+                    </strong>
+
+                </div>
+
+
+                <div class="invoice-detail-item">
+
+                    <span>
+                        <i class="bi bi-123 me-2"></i>
+                        Cantidad
+                    </span>
+
+                    <strong>
+                        {{ factura.cantidad }}
+                    </strong>
+
+                </div>
+
+
+                <div class="invoice-detail-item">
+
+                    <span>
+                        <i class="bi bi-currency-dollar me-2"></i>
+                        Precio unitario
+                    </span>
+
+                    <strong>
+                        ${{ "%.2f"|format(factura.precio) }}
+                    </strong>
+
+                </div>
+
+
+                <div class="invoice-detail-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ${{ "%.2f"|format(factura.total) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="invoice-success-actions">
+
+                <a
+                    href="{{ url_for('descargar_factura', id=factura.id_factura) }}"
+                    class="btn btn-danger">
+
+                    <i class="bi bi-file-earmark-pdf me-2"></i>
+                    Descargar factura PDF
+
+                </a>
+
+                <a
+                    href="{{ url_for('facturacion') }}"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-list-ul me-2"></i>
+                    Ver facturas
+
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
+    {% endif %}
 
 </section>
 
 
-<!-- ==========================================
+<!-- =====================================================
      CÁLCULO AUTOMÁTICO DEL PRECIO Y SUBTOTAL
-     ========================================== -->
+===================================================== -->
 
 <script>
-
-    // Precios de los productos registrados en la base de datos
 
     const productos = {
 

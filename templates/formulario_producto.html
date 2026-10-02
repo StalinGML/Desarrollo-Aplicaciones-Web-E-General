@@ -11,80 +11,112 @@ Agregar Producto
 
 {% block content %}
 
-<section class="my-5">
+<section class="admin-section form-page-section">
 
-    <div class="row justify-content-center">
+    <div class="form-page-header">
 
-        <div class="col-lg-7">
+        <div>
+            <span class="section-kicker">
+                {% if editar %}
+                    ADMINISTRACIÓN
+                {% else %}
+                    NUEVO REGISTRO
+                {% endif %}
+            </span>
 
-            <div class="card shadow">
+            <h2>
+                {% if editar %}
+                    Editar Producto
+                {% else %}
+                    Agregar Producto
+                {% endif %}
+            </h2>
 
-                <div class="card-body">
+            <p>
+                {% if editar %}
+                    Modifique la información del producto seleccionado.
+                {% else %}
+                    Registre un nuevo producto en el catálogo de IMPORDYCOM.
+                {% endif %}
+            </p>
+        </div>
 
-                    <h2 class="text-center mb-4">
+        <div class="form-page-icon">
+            <i class="bi bi-box-seam"></i>
+        </div>
 
-                        {% if editar %}
-                            Editar Producto
-                        {% else %}
-                            Agregar Producto
-                        {% endif %}
-
-                    </h2>
-
-                    <form method="POST">
-
-                        {{ form.hidden_tag() }}
-
-                        <!-- NOMBRE -->
-
-                        <div class="mb-3">
-
-                            {{ form.nombre.label(class="form-label") }}
-
-                            {{ form.nombre(
-                                class="form-control",
-                                placeholder="Ingrese el nombre del producto"
-                            ) }}
-
-                            {% for error in form.nombre.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+    </div>
 
 
-                        <!-- DESCRIPCIÓN -->
+    <div class="form-card-modern">
 
-                        <div class="mb-3">
+        <form method="POST">
 
-                            {{ form.descripcion.label(class="form-label") }}
-
-                            {{ form.descripcion(
-                                class="form-control",
-                                rows="4",
-                                placeholder="Ingrese la descripción del producto"
-                            ) }}
-
-                            {% for error in form.descripcion.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+            {{ form.hidden_tag() }}
 
 
-                        <!-- PRECIO -->
+            <!-- NOMBRE -->
 
-                        <div class="mb-3">
+            <div class="form-modern-group">
 
-                            {{ form.precio.label(class="form-label") }}
+                {{ form.nombre.label(class="form-label") }}
+
+                {{ form.nombre(
+                    class="form-control",
+                    placeholder="Ingrese el nombre del producto"
+                ) }}
+
+                {% for error in form.nombre.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- DESCRIPCIÓN -->
+
+            <div class="form-modern-group">
+
+                {{ form.descripcion.label(class="form-label") }}
+
+                {{ form.descripcion(
+                    class="form-control",
+                    rows="4",
+                    placeholder="Ingrese la descripción del producto"
+                ) }}
+
+                {% for error in form.descripcion.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PRECIO Y STOCK -->
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-modern-group">
+
+                        {{ form.precio.label(class="form-label") }}
+
+                        <div class="input-group-modern">
+
+                            <span class="input-group-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </span>
 
                             {{ form.precio(
                                 class="form-control",
@@ -93,22 +125,33 @@ Agregar Producto
                                 min="0"
                             ) }}
 
-                            {% for error in form.precio.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
                         </div>
 
+                        {% for error in form.precio.errors %}
 
-                        <!-- STOCK -->
+                            <div class="form-error">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
+                            </div>
 
-                        <div class="mb-3">
+                        {% endfor %}
 
-                            {{ form.stock.label(class="form-label") }}
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="form-modern-group">
+
+                        {{ form.stock.label(class="form-label") }}
+
+                        <div class="input-group-modern">
+
+                            <span class="input-group-icon">
+                                <i class="bi bi-boxes"></i>
+                            </span>
 
                             {{ form.stock(
                                 class="form-control",
@@ -116,69 +159,84 @@ Agregar Producto
                                 min="0"
                             ) }}
 
-                            {% for error in form.stock.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
                         </div>
 
+                        {% for error in form.stock.errors %}
 
-                        <!-- PROVEEDOR -->
+                            <div class="form-error">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                {{ error }}
+                            </div>
 
-                        <div class="mb-3">
+                        {% endfor %}
 
-                            {{ form.id_proveedor.label(class="form-label") }}
-
-                            {{ form.id_proveedor(
-                                class="form-select"
-                            ) }}
-
-                            {% for error in form.id_proveedor.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- BOTONES -->
-
-                        <div class="d-flex justify-content-between">
-
-                            <a
-                                href="{{ url_for('productos') }}"
-                                class="btn btn-secondary">
-                                Cancelar
-                            </a>
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary">
-
-                                {% if editar %}
-                                    Guardar cambios
-                                {% else %}
-                                    Registrar producto
-                                {% endif %}
-
-                            </button>
-
-                        </div>
-
-                    </form>
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- PROVEEDOR -->
+
+            <div class="form-modern-group">
+
+                {{ form.id_proveedor.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-truck"></i>
+                    </span>
+
+                    {{ form.id_proveedor(
+                        class="form-select"
+                    ) }}
+
+                </div>
+
+                {% for error in form.id_proveedor.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- BOTONES -->
+
+            <div class="form-actions-modern">
+
+                <a
+                    href="{{ url_for('productos') }}"
+                    class="btn btn-outline-secondary form-cancel-btn">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Cancelar
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary form-submit-btn">
+
+                    <i class="bi bi-check2-circle me-2"></i>
+
+                    {% if editar %}
+                        Guardar cambios
+                    {% else %}
+                        Registrar producto
+                    {% endif %}
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 

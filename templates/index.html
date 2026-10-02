@@ -1,92 +1,167 @@
 {% extends "base.html" %}
 
 {% block title %}
-IMPORDYCOM S.A.
+    Inicio | IMPORDYCOM S.A.
 {% endblock %}
 
 {% block content %}
 
-<!-- INICIO -->
-<section id="inicio" class="hero text-white text-center p-5 rounded shadow">
+<!-- =====================================================
+     HERO PRINCIPAL
+====================================================== -->
+<section id="inicio" class="hero-home">
 
-    <h2>Inicio</h2>
+    <div class="hero-overlay"></div>
 
-    <p>
-        Bienvenido al sitio web institucional de IMPORDYCOM S.A.,
-        una empresa dedicada a la importación y distribución de
-        materiales de acero inoxidable en Ecuador. Nuestro objetivo
-        es ofrecer productos de alta calidad como tubos, planchas,
-        barras y perfiles, dirigidos a los sectores industrial,
-        comercial y de construcción.
-    </p>
+    <div class="container position-relative">
+        <div class="row align-items-center min-vh-75">
 
-    <p>
-        Nos enfocamos en brindar un servicio eficiente, confiable y
-        orientado a satisfacer las necesidades de cada cliente,
-        contribuyendo al desarrollo de sus proyectos.
-    </p>
+            <div class="col-lg-8">
 
-    <a href="#contacto" class="btn btn-light mt-3">
-        Solicitar Información
-    </a>
+                <span class="hero-badge">
+                    <i class="bi bi-buildings me-2"></i>
+                    SOLUCIONES EN ACERO INOXIDABLE
+                </span>
+
+                <h2 class="hero-title mt-4">
+                    Calidad y resistencia
+                    <span>para cada proyecto</span>
+                </h2>
+
+                <p class="hero-text">
+                    Importamos y distribuimos materiales de acero inoxidable
+                    para proyectos industriales, comerciales y de construcción.
+                </p>
+
+                <p class="hero-text hero-text-secondary">
+                    Trabajamos con tubos, planchas, perfiles, accesorios y
+                    diferentes soluciones para el mercado ecuatoriano.
+                </p>
+
+                <div class="hero-actions mt-4">
+
+                    <a
+                        href="#cotizacion"
+                        class="btn btn-warning btn-lg px-4">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        Solicitar información
+                    </a>
+
+                    <a
+                        href="#quienes"
+                        class="btn btn-outline-light btn-lg px-4">
+                        <i class="bi bi-arrow-down-circle me-2"></i>
+                        Conocer más
+                    </a>
+
+                </div>
+
+                <div class="hero-features mt-5">
+
+                    <div class="hero-feature">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Calidad</span>
+                    </div>
+
+                    <div class="hero-feature">
+                        <i class="bi bi-box-seam"></i>
+                        <span>Materiales</span>
+                    </div>
+
+                    <div class="hero-feature">
+                        <i class="bi bi-headset"></i>
+                        <span>Atención personalizada</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
 </section>
 
 
-<!-- QUIÉNES SOMOS -->
-<section id="quienes" class="my-5">
+<!-- =====================================================
+     QUIÉNES SOMOS
+====================================================== -->
+<section id="quienes" class="section-modern">
 
-    <div class="row align-items-center">
+    <div class="container">
 
-        <div class="col-lg-6">
+        <div class="section-heading text-center">
 
-            <h2>Quiénes Somos</h2>
+            <span class="section-eyebrow">
+                SOBRE IMPORDYCOM
+            </span>
 
-            <p>
-                IMPORDYCOM S.A. es una empresa ecuatoriana especializada
-                en la importación, comercialización y distribución de
-                materiales de acero inoxidable, ofreciendo soluciones
-                para los sectores industrial, comercial y de construcción.
-                La empresa se ha consolidado gracias a su compromiso con
-                la calidad, la responsabilidad y la atención personalizada
-                a sus clientes.
-            </p>
+            <h2>
+                Soluciones pensadas para tus proyectos
+            </h2>
 
             <p>
-                Nuestro catálogo incluye productos como tubos,
-                planchas, barras, perfiles y accesorios metálicos
-                que cumplen con estándares de alta resistencia y
-                durabilidad.
+                Conoce nuestra empresa y las soluciones que ofrecemos.
             </p>
-
-            <p>
-                Además, contamos con un equipo de trabajo capacitado
-                que garantiza un proceso eficiente desde la importación
-                hasta la entrega del producto final. Buscamos
-                constantemente mejorar nuestros procesos logísticos
-                y de atención al cliente para asegurar la satisfacción
-                total. IMPORDYCOM S.A. mantiene una visión de crecimiento
-                sostenible basada en la confianza, innovación y compromiso
-                con el mercado ecuatoriano.
-            </p>
-
-            <button
-                class="btn btn-outline-primary mt-3"
-                data-bs-toggle="modal"
-                data-bs-target="#modalEmpresa">
-
-                Conocer más
-
-            </button>
 
         </div>
 
-        <div class="col-lg-6 text-center">
+        <div class="row align-items-center g-5">
 
-            <img
-                src="{{ url_for('static', filename='img/bodega.png') }}"
-                alt="Bodega de acero inoxidable IMPORDYCOM"
-                class="img-fluid rounded shadow">
+            <div class="col-lg-6">
+
+                <div class="content-card">
+
+                    <div class="content-icon">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+
+                    <h3>
+                        Importadora y distribuidora de acero inoxidable
+                    </h3>
+
+                    <p>
+                        IMPORDYCOM S.A. es una empresa dedicada a la importación
+                        y distribución de materiales de acero inoxidable para
+                        diferentes necesidades del mercado ecuatoriano.
+                    </p>
+
+                    <p>
+                        Nuestro catálogo incluye tubos, planchas, perfiles,
+                        accesorios y paneles estampados, ofreciendo alternativas
+                        para proyectos industriales, comerciales y de construcción.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn btn-dark px-4 mt-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEmpresa">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Conocer más
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="image-card">
+
+                    <img
+                        src="{{ url_for('static', filename='img/bodega.png') }}"
+                        alt="Bodega de IMPORDYCOM"
+                        class="img-fluid">
+
+                    <div class="image-card-caption">
+                        <i class="bi bi-box-seam me-2"></i>
+                        Materiales y soluciones para diferentes proyectos
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -95,48 +170,127 @@ IMPORDYCOM S.A.
 </section>
 
 
-<!-- PRODUCTOS -->
-<section id="productos" class="my-5">
+<!-- =====================================================
+     PRODUCTOS
+====================================================== -->
+<section id="productos" class="section-modern section-light">
 
-    <h2 class="text-center mb-4">
-        Productos
-    </h2>
+    <div class="container">
 
-    <div id="contenedorProductos" class="row">
+        <div class="section-heading text-center">
+
+            <span class="section-eyebrow">
+                NUESTROS PRODUCTOS
+            </span>
+
+            <h2>
+                Materiales disponibles
+            </h2>
+
+            <p>
+                Consulta los productos registrados en nuestro catálogo.
+            </p>
+
+        </div>
 
         {% if productos %}
 
-            {% for producto in productos %}
+            <div class="row g-4">
 
-                <div class="col-md-4 mb-3">
+                {% for producto in productos %}
 
-                    <div class="card h-100 shadow">
+                    <div class="col-md-6 col-xl-4">
 
-                        <div class="card-body">
+                        <article class="product-card">
 
-                            <h5 class="card-title">
-                                {{ producto.nombre }}
-                            </h5>
+                            {% set nombre_producto = producto.nombre | lower %}
 
-                            <p class="card-text">
-                                {{ producto.descripcion }}
-                            </p>
+                            <div class="product-card-image">
 
-                        </div>
+                                {% if 'tubo' in nombre_producto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/tubos.png') }}"
+                                        alt="Tubos de acero inoxidable">
+
+                                {% elif 'plancha' in nombre_producto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/planchas.png') }}"
+                                        alt="Planchas de acero inoxidable">
+
+                                {% elif 'perfil' in nombre_producto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/perfiles.png') }}"
+                                        alt="Perfiles de acero inoxidable">
+
+                                {% elif 'panel' in nombre_producto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/paneles.png') }}"
+                                        alt="Paneles estampados de acero inoxidable">
+
+                                {% elif 'accesorio' in nombre_producto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/accesorios.png') }}"
+                                        alt="Accesorios de acero inoxidable">
+
+                                {% else %}
+
+                                    <img
+                                        src="{{ url_for('static', filename='img/bodega.png') }}"
+                                        alt="{{ producto.nombre }}">
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="product-card-body">
+
+                                <span class="product-label">
+                                    PRODUCTO
+                                </span>
+
+                                <h3>
+                                    {{ producto.nombre }}
+                                </h3>
+
+                                <p>
+                                    {{ producto.descripcion }}
+                                </p>
+
+                            </div>
+
+                            <div class="product-card-footer">
+                                <span>
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    Disponible en catálogo
+                                </span>
+                            </div>
+
+                        </article>
 
                     </div>
 
-                </div>
+                {% endfor %}
 
-            {% endfor %}
+            </div>
 
         {% else %}
 
-            <div class="col-12">
+            <div class="empty-state">
 
-                <div class="alert alert-warning text-center">
-                    No existen productos registrados.
-                </div>
+                <i class="bi bi-box-seam"></i>
+
+                <h3>
+                    No hay productos registrados
+                </h3>
+
+                <p>
+                    Actualmente no existen productos disponibles para mostrar.
+                </p>
 
             </div>
 
@@ -147,201 +301,317 @@ IMPORDYCOM S.A.
 </section>
 
 
-<!-- FORMULARIO Y REGISTRO DE SOLICITUDES -->
-<section id="cotizacion" class="my-5">
+<!-- =====================================================
+     COTIZACIONES
+====================================================== -->
+<section id="cotizacion" class="section-modern">
 
-    <h2 class="text-center mb-4">
-        Registro de Solicitudes de Cotización
-    </h2>
+    <div class="container">
 
-    <div class="row">
+        <div class="section-heading text-center">
 
-        <div class="col-lg-5">
+            <span class="section-eyebrow">
+                COTIZACIONES
+            </span>
 
-            <form
-                id="formSolicitud"
-                class="card shadow p-4"
-                action="{{ url_for('cotizar') }}"
-                method="POST">
+            <h2>
+                Solicita información sobre nuestros productos
+            </h2>
 
-                <div class="row">
-
-                    <div class="col-12 mb-3">
-
-                        <label
-                            for="nombreCliente"
-                            class="form-label">
-
-                            Nombre del cliente
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nombreCliente"
-                            name="nombre"
-                            class="form-control"
-                            placeholder="Ingrese el nombre">
-
-                        <small
-                            id="errorNombre"
-                            class="d-block mt-1">
-                        </small>
-
-                    </div>
-
-
-                    <div class="col-12 mb-3">
-
-                        <label
-                            for="productoSolicitud"
-                            class="form-label">
-
-                            Producto solicitado
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="productoSolicitud"
-                            name="producto"
-                            class="form-control"
-                            placeholder="Ingrese el producto">
-
-                        <small
-                            id="errorProducto"
-                            class="d-block mt-1">
-                        </small>
-
-                    </div>
-
-
-                    <div class="col-12 mb-3">
-
-                        <label
-                            for="tipoSolicitud"
-                            class="form-label">
-
-                            Categoría
-
-                        </label>
-
-                        <select
-                            id="tipoSolicitud"
-                            name="categoria"
-                            class="form-select">
-
-                            <option value="">
-                                Seleccione una categoría
-                            </option>
-
-                            <option>
-                                Industrial
-                            </option>
-
-                            <option>
-                                Comercial
-                            </option>
-
-                            <option>
-                                Construcción
-                            </option>
-
-                        </select>
-
-                        <small
-                            id="errorCategoria"
-                            class="d-block mt-1">
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn btn-success w-100">
-
-                    Registrar Solicitud
-
-                </button>
-
-
-                <div
-                    id="spinnerCarga"
-                    class="text-center mt-3 d-none">
-
-                    <div
-                        class="spinner-border text-success"
-                        role="status">
-
-                        <span class="visually-hidden">
-                            Cargando...
-                        </span>
-
-                    </div>
-
-                    <p class="mt-2">
-                        Registrando solicitud...
-                    </p>
-
-                </div>
-
-
-                <div id="mensaje" class="mt-3"></div>
-
-            </form>
+            <p>
+                Completa el formulario y registra tu solicitud.
+            </p>
 
         </div>
 
 
-        <div class="col-lg-7">
+        <div class="row g-4 align-items-start">
 
-            <h4>
-                Total de solicitudes:
-                <span id="contador">{{ solicitudes|length }}</span>
-            </h4>
 
-            <div id="listaSolicitudes">
+            <!-- FORMULARIO -->
+            <div class="col-lg-7">
 
-                {% if solicitudes %}
+                <div class="quote-card">
 
-                    {% for solicitud in solicitudes %}
+                    <div class="quote-card-header">
 
-                        <div class="card shadow p-3 mb-3">
+                        <div>
 
-                            <p class="mb-2">
-                                <strong>Cliente:</strong> {{ solicitud.nombre }}<br>
-                                <strong>Producto:</strong> {{ solicitud.producto }}<br>
-                                <strong>Categoría:</strong> {{ solicitud.categoria }}
-                            </p>
+                            <span class="section-eyebrow">
+                                SOLICITUD
+                            </span>
 
-                            <form
-                                action="{{ url_for('eliminar', indice=loop.index0) }}"
-                                method="POST">
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger btn-sm">
-
-                                    Eliminar
-
-                                </button>
-
-                            </form>
+                            <h3>
+                                Solicitar cotización
+                            </h3>
 
                         </div>
 
-                    {% endfor %}
+                        <div class="quote-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
 
-                {% else %}
-
-                    <div class="alert alert-info">
-                        No existen solicitudes de cotización registradas.
                     </div>
 
-                {% endif %}
+
+                    <form
+                        id="formSolicitud"
+                        method="POST"
+                        action="{{ url_for('cotizar') }}"
+                        novalidate>
+
+
+                        <!-- NOMBRE -->
+                        <div class="mb-3">
+
+                            <label
+                                for="nombreCliente"
+                                class="form-label">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="nombreCliente"
+                                name="nombre"
+                                placeholder="Ingrese su nombre"
+                                required>
+
+                            <div
+                                id="errorNombre"
+                                class="small mt-1">
+                            </div>
+
+                        </div>
+
+
+                        <!-- PRODUCTO -->
+                        <div class="mb-3">
+
+                            <label
+                                for="productoSolicitud"
+                                class="form-label">
+                                Producto
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="productoSolicitud"
+                                name="producto"
+                                placeholder="Producto de interés"
+                                required>
+
+                            <div
+                                id="errorProducto"
+                                class="small mt-1">
+                            </div>
+
+                        </div>
+
+
+                        <!-- CATEGORÍA -->
+                        <div class="mb-4">
+
+                            <label
+                                for="tipoSolicitud"
+                                class="form-label">
+                                Categoría
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="tipoSolicitud"
+                                name="categoria"
+                                required>
+
+                                <option value="">
+                                    Seleccione una categoría
+                                </option>
+
+                                <option value="Industrial">
+                                    Industrial
+                                </option>
+
+                                <option value="Comercial">
+                                    Comercial
+                                </option>
+
+                                <option value="Construcción">
+                                    Construcción
+                                </option>
+
+                            </select>
+
+                            <div
+                                id="errorCategoria"
+                                class="small mt-1">
+                            </div>
+
+                        </div>
+
+
+                        <!-- MENSAJE DE VALIDACIÓN -->
+                        <div
+                            id="mensaje"
+                            class="mt-3">
+                        </div>
+
+
+                        <!-- BOTÓN -->
+                        <button
+                            type="submit"
+                            class="btn btn-warning w-100 py-2 fw-semibold mt-2">
+
+                            <i class="bi bi-send me-2"></i>
+
+                            Enviar solicitud
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- SOLICITUDES REALIZADAS -->
+            <div class="col-lg-5">
+
+                <div class="requests-card">
+
+                    <div class="requests-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                REGISTROS
+                            </span>
+
+                            <h3>
+                                Solicitudes realizadas
+                            </h3>
+
+                        </div>
+
+                        <div class="requests-count">
+                            {{ solicitudes|length }}
+                        </div>
+
+                    </div>
+
+
+                    {% if solicitudes %}
+
+                        <div class="requests-list">
+
+                            {% for solicitud in solicitudes %}
+
+                                <div class="request-item">
+
+                                    <div class="request-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+
+
+                                    <div class="request-info">
+
+                                        <strong>
+                                            {{ solicitud.nombre }}
+                                        </strong>
+
+                                        <span>
+                                            {{ solicitud.producto }}
+                                        </span>
+
+                                        <small>
+                                            {{ solicitud.categoria }}
+                                        </small>
+
+                                    </div>
+
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('eliminar', indice=loop.index0) }}">
+                                        
+
+                                        <button
+                                            type="submit"
+                                            class="btn btn-sm btn-outline-danger"
+                                            title="Eliminar solicitud">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                    {% else %}
+
+                        <div class="empty-state empty-state-small">
+
+                            <i class="bi bi-inbox"></i>
+
+                            <p>
+                                No existen solicitudes registradas.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     MULTIMEDIA
+====================================================== -->
+<section class="section-media">
+
+    <div class="container">
+
+        <div class="section-heading text-center text-white">
+
+            <span class="section-eyebrow section-eyebrow-light">
+                CONOCE MÁS
+            </span>
+
+            <h2>
+                IMPORDYCOM S.A.
+            </h2>
+
+            <p>
+                Conoce más sobre nuestra actividad y propuesta.
+            </p>
+
+        </div>
+
+        <div class="video-card">
+
+            <div class="ratio ratio-16x9">
+
+                <iframe
+                    src="https://www.youtube.com/embed/L6ofyfKvNYw"
+                    title="Video IMPORDYCOM"
+                    allowfullscreen>
+                </iframe>
 
             </div>
 
@@ -352,171 +622,291 @@ IMPORDYCOM S.A.
 </section>
 
 
-<!-- SECCIÓN MULTIMEDIA -->
-<section class="my-5">
+<!-- =====================================================
+     CONTACTO
+====================================================== -->
+<section id="contacto" class="section-modern">
 
-    <h2 class="text-center mb-4">
-        Proceso de fabricación del acero inoxidable
-    </h2>
+    <div class="container">
 
-    <div class="d-flex justify-content-center mb-4">
+        <div class="section-heading text-center">
 
-        <div
-            class="ratio ratio-16x9 shadow rounded"
-            style="max-width: 800px; width: 100%;">
+            <span class="section-eyebrow">
+                CONTÁCTANOS
+            </span>
 
-            <iframe
-                src="https://www.youtube.com/embed/L6ofyfKvNYw"
-                title="Video sobre acero inoxidable"
-                allowfullscreen>
-            </iframe>
+            <h2>
+                Estamos para ayudarte
+            </h2>
+
+            <p>
+                Encuentra nuestros canales de contacto y envíanos tu consulta.
+            </p>
 
         </div>
 
-    </div>
+        <div class="row g-4">
 
-    <p class="mt-3">
-        Este video muestra el proceso industrial mediante el cual se
-        fabrica el acero inoxidable, desde la selección de materias
-        primas hasta su transformación en productos finales como tubos,
-        planchas y barras. Este proceso es fundamental para garantizar
-        la resistencia, durabilidad y calidad de los materiales utilizados
-        en la industria y la construcción.
-    </p>
+            <!-- INFORMACIÓN -->
+            <div class="col-lg-5">
 
-</section>
+                <div class="contact-card h-100">
 
+                    <div class="contact-card-header">
 
-<!-- CONTACTO -->
-<section id="contacto" class="my-5">
+                        <div class="contact-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
 
-    <h2 class="text-center mb-4">
-        Contacto
-    </h2>
+                        <div>
+                            <h3>
+                                Información de contacto
+                            </h3>
 
-    <div class="row">
+                            <p>
+                                Comunícate con nuestro equipo.
+                            </p>
+                        </div>
 
-        <div class="col-lg-6">
-
-            <p>
-                <strong>Correo:</strong>
-                ventas1@impordycom.com
-            </p>
-
-            <p>
-                <strong>Teléfono:</strong>
-                0994292304
-            </p>
-
-            <p>
-                <strong>Dirección:</strong>
-                Kennedy Norte, Guayaquil - Ecuador
-            </p>
+                    </div>
 
 
-            <div class="mt-3">
+                    <div class="contact-item">
 
-                <a
-                    href="mailto:ventas1@impordycom.com"
-                    class="btn btn-primary m-1">
+                        <div class="contact-item-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
 
-                    Correo
+                        <div>
+                            <span>Correo electrónico</span>
 
-                </a>
+                            <a href="mailto:ventas1@impordycom.com">
+                                ventas1@impordycom.com
+                            </a>
+                        </div>
 
-                <a
-                    href="https://www.facebook.com/profile.php?id=100067472088809"
-                    target="_blank"
-                    class="btn btn-outline-primary m-1">
+                    </div>
 
-                    Facebook
 
-                </a>
+                    <div class="contact-item">
 
-                <a
-                    href="https://www.instagram.com/impordycom/"
-                    target="_blank"
-                    class="btn btn-outline-danger m-1">
+                        <div class="contact-item-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
 
-                    Instagram
+                        <div>
+                            <span>Teléfono</span>
 
-                </a>
+                            <a href="tel:0994292304">
+                                0994292304
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-item-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+
+                        <div>
+                            <span>Ubicación</span>
+
+                            <strong>
+                                Kennedy Norte, Guayaquil - Ecuador
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="social-links mt-4">
+
+                        <a
+                            href="mailto:ventas1@impordycom.com"
+                            class="social-btn"
+                            aria-label="Correo electrónico"
+                            title="Enviar correo">
+                            <i class="bi bi-envelope"></i>
+                        </a>
+
+                        <a
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="social-btn"
+                            aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        <a
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="social-btn"
+                            aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORMULARIO DE CONTACTO -->
+            <div class="col-lg-7">
+
+                <div class="contact-form-card">
+
+                    <div class="contact-card-header">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+
+                        <div>
+                            <h3>
+                                Envíanos un mensaje
+                            </h3>
+
+                            <p>
+                                Déjanos tus datos y nos pondremos en contacto.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <form>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="contactNombre"
+                                    class="form-label">
+                                    Nombre
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="contactNombre"
+                                    class="form-control"
+                                    placeholder="Tu nombre">
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="contactCorreo"
+                                    class="form-label">
+                                    Correo
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="contactCorreo"
+                                    class="form-control"
+                                    placeholder="tu@email.com">
+
+                            </div>
+
+                            <div class="col-12">
+
+                                <label
+                                    for="contactMensaje"
+                                    class="form-label">
+                                    Mensaje
+                                </label>
+
+                                <textarea
+                                    id="contactMensaje"
+                                    class="form-control"
+                                    rows="5"
+                                    placeholder="Escribe tu consulta..."></textarea>
+
+                            </div>
+
+                            <div class="col-12">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-dark px-4">
+                                    <i class="bi bi-send me-2"></i>
+                                    Enviar mensaje
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="col-lg-6">
-
-            <form>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Nombre
-                    </label>
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Nombre">
-
-                </div>
+</section>
 
 
-                <div class="mb-3">
+<!-- =====================================================
+     INFORMACIÓN ADICIONAL
+====================================================== -->
+<section class="section-info">
 
-                    <label class="form-label">
-                        Correo electrónico
-                    </label>
+    <div class="container">
 
-                    <input
-                        type="email"
-                        class="form-control"
-                        placeholder="Correo electrónico">
+        <div class="info-banner">
 
-                </div>
+            <div class="info-banner-icon">
+                <i class="bi bi-info-circle"></i>
+            </div>
 
+            <div class="info-banner-content">
 
-                <div class="mb-3">
+                <span class="section-eyebrow">
+                    INFORMACIÓN ADICIONAL
+                </span>
 
-                    <label class="form-label">
-                        Asunto
-                    </label>
+                <h2>
+                    Atención y disponibilidad
+                </h2>
 
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Asunto">
+                <p>
+                    Consulta disponibilidad de materiales, realiza pedidos
+                    industriales o mayoristas y comunícate con nosotros
+                    durante nuestro horario de atención.
+                </p>
 
-                </div>
+                <div class="info-points">
 
+                    <span>
+                        <i class="bi bi-check-circle"></i>
+                        Disponibilidad de materiales
+                    </span>
 
-                <div class="mb-3">
+                    <span>
+                        <i class="bi bi-check-circle"></i>
+                        Pedidos industriales y mayoristas
+                    </span>
 
-                    <label class="form-label">
-                        Mensaje
-                    </label>
-
-                    <textarea
-                        class="form-control"
-                        rows="5"
-                        placeholder="Mensaje">
-                    </textarea>
+                    <span>
+                        <i class="bi bi-clock"></i>
+                        Horario de atención
+                    </span>
 
                 </div>
 
-
-                <button
-                    type="submit"
-                    class="btn btn-primary w-100">
-
-                    Enviar
-
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
@@ -525,84 +915,64 @@ IMPORDYCOM S.A.
 </section>
 
 
-<!-- ASIDE -->
-<aside class="container bg-light p-4 text-center rounded shadow mb-4">
-
-    <h2>
-        Información adicional
-    </h2>
-
-    <p>
-        Disponibilidad de materiales de acero inoxidable para proyectos
-        comerciales, industriales y de construcción.
-    </p>
-
-    <p>
-        Atención a pedidos industriales y mayoristas en Guayaquil.
-    </p>
-
-    <h3>
-        Horarios de Atención
-    </h3>
-
-    <p>
-        Lunes a Viernes: 08h30 - 17h30
-    </p>
-
-</aside>
-
-
-<!-- MODAL -->
+<!-- =====================================================
+     MODAL EMPRESA
+====================================================== -->
 <div
     class="modal fade"
     id="modalEmpresa"
-    tabindex="-1">
+    tabindex="-1"
+    aria-labelledby="modalEmpresaLabel"
+    aria-hidden="true">
 
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-dialog-centered">
 
         <div class="modal-content">
 
-            <div class="modal-header bg-dark text-white">
+            <div class="modal-header">
 
-                <h5 class="modal-title">
-                    Información de IMPORDYCOM S.A.
+                <h5
+                    class="modal-title"
+                    id="modalEmpresaLabel">
+                    <i class="bi bi-buildings me-2"></i>
+                    Sobre IMPORDYCOM S.A.
                 </h5>
 
                 <button
                     type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal">
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Cerrar">
                 </button>
 
             </div>
 
-
             <div class="modal-body">
 
                 <p>
-                    IMPORDYCOM S.A. se especializa en la importación
-                    y distribución de materiales de acero inoxidable
-                    para los sectores industrial, comercial y de
-                    construcción.
+                    IMPORDYCOM S.A. se dedica a la importación y distribución
+                    de materiales de acero inoxidable para el mercado ecuatoriano.
                 </p>
 
                 <p>
-                    Nuestro compromiso es ofrecer productos de calidad,
-                    atención personalizada y soluciones confiables
-                    para nuestros clientes en todo el Ecuador.
+                    Ofrecemos tubos, planchas, perfiles, accesorios y paneles
+                    estampados para diferentes aplicaciones y proyectos.
+                </p>
+
+                <p class="mb-0">
+                    Nuestro objetivo es brindar alternativas de materiales
+                    y atención a las necesidades de nuestros clientes.
                 </p>
 
             </div>
 
-
             <div class="modal-footer">
 
                 <button
-                    class="btn btn-secondary"
+                    type="button"
+                    class="btn btn-dark"
                     data-bs-dismiss="modal">
-
                     Cerrar
-
                 </button>
 
             </div>

@@ -11,151 +11,208 @@ Agregar Cliente
 
 {% block content %}
 
-<section class="my-5">
+<section class="admin-section form-page-section">
 
-    <div class="row justify-content-center">
+    <div class="form-page-header">
 
-        <div class="col-lg-6">
+        <div>
 
-            <div class="card shadow">
+            <span class="section-kicker">
+                {% if editar %}
+                    ADMINISTRACIÓN
+                {% else %}
+                    NUEVO REGISTRO
+                {% endif %}
+            </span>
 
-                <div class="card-body">
+            <h2>
+                {% if editar %}
+                    Editar Cliente
+                {% else %}
+                    Agregar Cliente
+                {% endif %}
+            </h2>
 
-                    <h2 class="text-center mb-4">
+            <p>
+                {% if editar %}
+                    Modifique la información del cliente seleccionado.
+                {% else %}
+                    Registre un nuevo cliente en el sistema.
+                {% endif %}
+            </p>
 
-                        {% if editar %}
-                            Editar Cliente
-                        {% else %}
-                            Agregar Cliente
-                        {% endif %}
+        </div>
 
-                    </h2>
+        <div class="form-page-icon">
+            <i class="bi bi-person"></i>
+        </div>
 
-                    <form method="POST">
-
-                        {{ form.hidden_tag() }}
-
-                        <!-- NOMBRE -->
-
-                        <div class="mb-3">
-
-                            {{ form.nombre.label(class="form-label") }}
-
-                            {{ form.nombre(
-                                class="form-control",
-                                placeholder="Ingrese el nombre del cliente"
-                            ) }}
-
-                            {% for error in form.nombre.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+    </div>
 
 
-                        <!-- CÉDULA -->
+    <div class="form-card-modern">
 
-                        <div class="mb-3">
+        <form method="POST">
 
-                            {{ form.cedula.label(class="form-label") }}
-
-                            {{ form.cedula(
-                                class="form-control",
-                                placeholder="Ingrese la cédula",
-                                maxlength="10"
-                            ) }}
-
-                            {% for error in form.cedula.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+            {{ form.hidden_tag() }}
 
 
-                        <!-- CORREO -->
+            <!-- NOMBRE -->
 
-                        <div class="mb-3">
+            <div class="form-modern-group">
 
-                            {{ form.correo.label(class="form-label") }}
+                {{ form.nombre.label(class="form-label") }}
 
-                            {{ form.correo(
-                                class="form-control",
-                                placeholder="Ingrese el correo electrónico"
-                            ) }}
+                <div class="input-group-modern">
 
-                            {% for error in form.correo.errors %}
+                    <span class="input-group-icon">
+                        <i class="bi bi-person"></i>
+                    </span>
 
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- TELÉFONO -->
-
-                        <div class="mb-3">
-
-                            {{ form.telefono.label(class="form-label") }}
-
-                            {{ form.telefono(
-                                class="form-control",
-                                placeholder="Ingrese el teléfono",
-                                maxlength="15"
-                            ) }}
-
-                            {% for error in form.telefono.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
-                        <!-- BOTONES -->
-
-                        <div class="d-flex justify-content-between">
-
-                            <a
-                                href="{{ url_for('clientes') }}"
-                                class="btn btn-secondary">
-                                Cancelar
-                            </a>
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary">
-
-                                {% if editar %}
-                                    Guardar cambios
-                                {% else %}
-                                    Registrar cliente
-                                {% endif %}
-
-                            </button>
-
-                        </div>
-
-                    </form>
+                    {{ form.nombre(
+                        class="form-control",
+                        placeholder="Ingrese el nombre del cliente"
+                    ) }}
 
                 </div>
 
+                {% for error in form.nombre.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
             </div>
 
-        </div>
+
+            <!-- CÉDULA -->
+
+            <div class="form-modern-group">
+
+                {{ form.cedula.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-card-text"></i>
+                    </span>
+
+                    {{ form.cedula(
+                        class="form-control",
+                        placeholder="Ingrese la cédula",
+                        maxlength="10"
+                    ) }}
+
+                </div>
+
+                {% for error in form.cedula.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- CORREO -->
+
+            <div class="form-modern-group">
+
+                {{ form.correo.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+
+                    {{ form.correo(
+                        class="form-control",
+                        placeholder="Ingrese el correo electrónico"
+                    ) }}
+
+                </div>
+
+                {% for error in form.correo.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- TELÉFONO -->
+
+            <div class="form-modern-group">
+
+                {{ form.telefono.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-telephone"></i>
+                    </span>
+
+                    {{ form.telefono(
+                        class="form-control",
+                        placeholder="Ingrese el teléfono",
+                        maxlength="15"
+                    ) }}
+
+                </div>
+
+                {% for error in form.telefono.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- BOTONES -->
+
+            <div class="form-actions-modern">
+
+                <a
+                    href="{{ url_for('clientes') }}"
+                    class="btn btn-outline-secondary form-cancel-btn">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Cancelar
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary form-submit-btn">
+
+                    <i class="bi bi-check2-circle me-2"></i>
+
+                    {% if editar %}
+                        Guardar cambios
+                    {% else %}
+                        Registrar cliente
+                    {% endif %}
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 

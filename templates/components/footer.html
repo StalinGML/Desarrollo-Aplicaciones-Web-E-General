@@ -1,10 +1,180 @@
-<!-- FOOTER -->
-<footer class="text-center bg-dark text-white p-3">
+<!-- =====================================================
+     FOOTER PRINCIPAL
+====================================================== -->
 
-    <p class="m-0">
-        Elaborado por: Stalin Mendieta & Lilian Quijije |
-        Desarrollo de Aplicaciones Web |
-        2026
-    </p>
+<footer class="footer-modern">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- MARCA -->
+            <div class="col-lg-5">
+
+                <a
+                    href="{{ url_for('inicio') }}"
+                    class="footer-brand">
+
+                    <i class="bi bi-buildings"></i>
+
+                    <span>
+                        IMPORDYCOM S.A.
+                    </span>
+
+                </a>
+
+                <p class="footer-description">
+                    Importadora y distribuidora de materiales de acero
+                    inoxidable para diferentes proyectos y necesidades
+                    del mercado ecuatoriano.
+                </p>
+
+                <!-- REDES Y CORREO -->
+                <div class="footer-social">
+
+                    <a
+                        href="mailto:ventas1@impordycom.com"
+                        aria-label="Correo electrónico"
+                        title="Correo electrónico">
+
+                        <i class="bi bi-envelope"></i>
+
+                    </a>
+
+                    <a
+                        href="https://www.facebook.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                        title="Facebook">
+
+                        <i class="bi bi-facebook"></i>
+
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                        title="Instagram">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVEGACIÓN -->
+            <div class="col-sm-6 col-lg-3">
+
+                <h5>
+                    Navegación
+                </h5>
+
+                <div class="footer-links">
+
+                    <a href="{{ url_for('inicio') }}">
+                        <i class="bi bi-house-door me-2"></i>
+                        Inicio
+                    </a>
+
+                    <a href="{{ url_for('inicio') }}#quienes">
+                        <i class="bi bi-buildings me-2"></i>
+                        Quiénes Somos
+                    </a>
+
+                    <a href="{{ url_for('inicio') }}#productos">
+                        <i class="bi bi-box-seam me-2"></i>
+                        Productos
+                    </a>
+
+                    <a href="{{ url_for('inicio') }}#cotizacion">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        Cotizaciones
+                    </a>
+
+                    <a href="{{ url_for('inicio') }}#contacto">
+                        <i class="bi bi-envelope me-2"></i>
+                        Contacto
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACTO -->
+            <div class="col-sm-6 col-lg-4">
+
+                <h5>
+                    Contacto
+                </h5>
+
+                <div class="footer-contact">
+
+                    <div class="footer-contact-item">
+
+                        <i class="bi bi-envelope"></i>
+
+                        <span>
+                            ventas1@impordycom.com
+                        </span>
+
+                    </div>
+
+                    <div class="footer-contact-item">
+
+                        <i class="bi bi-telephone"></i>
+
+                        <span>
+                            0994292304
+                        </span>
+
+                    </div>
+
+                    <div class="footer-contact-item">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        <span>
+                            Kennedy Norte, Guayaquil - Ecuador
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BARRA INFERIOR -->
+        <div class="footer-bottom">
+
+            <div class="row align-items-center g-2">
+
+                <div class="col-12 text-center">
+
+                    <p>
+                        © 2026 IMPORDYCOM S.A.
+                        <span class="mx-1">·</span>
+                        Desarrollado por
+                        <strong>Stalin Mendieta & Lilian Quijije</strong>
+                        <span class="mx-1">·</span>
+                        Desarrollo de Aplicaciones Web
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </footer>

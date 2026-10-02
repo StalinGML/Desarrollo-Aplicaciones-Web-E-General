@@ -6,49 +6,89 @@ Productos - IMPORDYCOM S.A.
 
 {% block content %}
 
-<section class="my-5">
+<!-- ============================== -->
 
-    <h2 class="text-center mb-3">
-        Catálogo de Productos
+<!-- ENCABEZADO DEL CATÁLOGO -->
+
+<!-- ============================== -->
+
+<section class="section-modern">
+
+<div class="section-heading text-center mb-5">
+
+    <span class="section-kicker">
+        NUESTRO CATÁLOGO
+    </span>
+
+    <h2>
+        Productos
     </h2>
 
-    <p class="text-center mb-5">
-        Conozca las principales categorías de productos de acero inoxidable
-        disponibles para los sectores industrial, comercial y de construcción.
+    <p>
+        Conozca nuestras principales categorías de productos de acero
+        inoxidable para los sectores industrial, comercial y de construcción.
     </p>
 
+</div>
 
-    <div class="row">
 
-        {% for producto in productos %}
+<!-- ============================== -->
+<!-- TARJETAS DEL CATÁLOGO -->
+<!-- ============================== -->
 
-            <div class="col-md-6 col-lg-4 mb-4">
+<div class="row g-4">
 
-                <div class="card h-100 shadow">
+    {% for producto in productos %}
 
-                    {% if producto.imagen %}
+        <div class="col-md-6 col-lg-4">
+
+            <article class="product-card h-100">
+
+                
+                {% if producto.imagen %}
+
+                    <div class="product-card-image">
 
                         <img
                             src="{{ url_for('static', filename='img/' + producto.imagen) }}"
-                            class="card-img-top"
                             alt="{{ producto.nombre }}">
 
-                    {% endif %}
+                    </div>
 
-                    <div class="card-body">
+                {% else %}
 
-                        <h4 class="card-title">
-                            {{ producto.nombre }}
-                        </h4>
+                    <div class="product-card-placeholder">
 
-                        <p class="card-text">
-                            {{ producto.descripcion }}
-                        </p>
+                        <i class="bi bi-box-seam"></i>
 
-                        {% if producto.caracteristicas %}
+                        <span>Producto</span>
 
-                            <h6 class="mt-3">
-                                Principales características:
+                    </div>
+
+                {% endif %}
+
+
+                <div class="product-card-body">
+
+                    <span class="product-card-tag">
+                        ACERO INOXIDABLE
+                    </span>
+
+                    <h3>
+                        {{ producto.nombre }}
+                    </h3>
+
+                    <p>
+                        {{ producto.descripcion }}
+                    </p>
+
+
+                    {% if producto.caracteristicas %}
+
+                        <div class="product-features">
+
+                            <h6>
+                                Principales características
                             </h6>
 
                             <ul>
@@ -56,42 +96,51 @@ Productos - IMPORDYCOM S.A.
                                 {% for caracteristica in producto.caracteristicas %}
 
                                     <li>
-                                        {{ caracteristica }}
+                                        <i class="bi bi-check2"></i>
+                                        <span>{{ caracteristica }}</span>
                                     </li>
 
                                 {% endfor %}
 
                             </ul>
 
-                        {% endif %}
+                        </div>
 
-                    </div>
+                    {% endif %}
 
                 </div>
 
-            </div>
+            </article>
 
-        {% endfor %}
+        </div>
 
-    </div>
+    {% endfor %}
+
+</div>
 
 </section>
 
-
 <!-- ============================== -->
+
 <!-- PRODUCTOS REGISTRADOS -->
+
 <!-- ============================== -->
 
-<section class="my-5">
+<section class="admin-section">
 
-    {% with mensajes = get_flashed_messages(with_categories=true) %}
-        {% if mensajes %}
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+
+    {% if mensajes %}
+
+        <div class="mb-4">
 
             {% for categoria, mensaje in mensajes %}
 
                 <div
                     class="alert alert-{{ categoria }} alert-dismissible fade show"
                     role="alert">
+
+                    <i class="bi bi-info-circle me-2"></i>
 
                     {{ mensaje }}
 
@@ -106,41 +155,66 @@ Productos - IMPORDYCOM S.A.
 
             {% endfor %}
 
-        {% endif %}
-    {% endwith %}
+        </div>
+
+    {% endif %}
+
+{% endwith %}
 
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
+<div class="admin-section-header">
 
-        <h2 class="mb-0">
+    <div>
+
+        <span class="section-kicker">
+            GESTIÓN
+        </span>
+
+        <h2>
             Productos registrados
         </h2>
 
-        <a
-            href="{{ url_for('formulario_producto') }}"
-            class="btn btn-primary">
-            Agregar producto
-        </a>
+        <p>
+            Administre los productos almacenados en el sistema.
+        </p>
 
     </div>
 
+
+    <a
+        href="{{ url_for('formulario_producto') }}"
+        class="btn btn-primary modern-btn">
+
+        <i class="bi bi-plus-lg me-2"></i>
+        Agregar producto
+
+    </a>
+
+</div>
+
+
+<div class="admin-table-card">
+
     <div class="table-responsive">
 
-        <table class="table table-bordered table-striped table-hover">
+        <table class="table modern-table align-middle mb-0">
 
-            <thead class="table-dark">
+            <thead>
 
                 <tr>
+
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Proveedor</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Acciones</th>
+
                 </tr>
 
             </thead>
+
 
             <tbody>
 
@@ -149,50 +223,99 @@ Productos - IMPORDYCOM S.A.
                     <tr>
 
                         <td>
-                            {{ producto[0] }}
+                            <span class="table-id">
+                                #{{ producto[0] }}
+                            </span>
                         </td>
 
                         <td>
-                            {{ producto[1] }}
+                            <strong>
+                                {{ producto[1] }}
+                            </strong>
                         </td>
 
                         <td>
-                            {{ producto[2] }}
+                            <span class="table-description">
+                                {{ producto[2] }}
+                            </span>
                         </td>
 
                         <td>
-                            ${{ producto[3] }}
+                            <strong class="product-price">
+                                ${{ producto[3] }}
+                            </strong>
                         </td>
 
                         <td>
-                            {{ producto[4] }}
+
+                            {% if producto[4] > 0 %}
+
+                                <span class="stock-badge stock-available">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    {{ producto[4] }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="stock-badge stock-empty">
+                                    <i class="bi bi-x-circle me-1"></i>
+                                    Sin stock
+                                </span>
+
+                            {% endif %}
+
                         </td>
 
                         <td>
-                            {{ producto[5] or 'Sin proveedor' }}
+
+                            {% if producto[5] %}
+
+                                <span class="supplier-badge">
+                                    <i class="bi bi-truck me-1"></i>
+                                    {{ producto[5] }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="text-muted">
+                                    Sin proveedor
+                                </span>
+
+                            {% endif %}
+
                         </td>
 
-                        <td class="text-nowrap">
+                        <td class="text-center">
 
-                            <a
-                                href="{{ url_for('editar_producto', id=producto[0]) }}"
-                                class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
+                            <div class="table-actions">
 
-                            <form
-                                action="{{ url_for('eliminar_producto', id=producto[0]) }}"
-                                method="POST"
-                                style="display: inline; margin: 0; padding: 0; border: 0;">
+                                <a
+                                    href="{{ url_for('editar_producto', id=producto[0]) }}"
+                                    class="btn btn-sm btn-edit">
 
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Está seguro de eliminar este producto?');">
-                                    Eliminar
-                                </button>
+                                    <i class="bi bi-pencil-square me-1"></i>
+                                    Editar
 
-                            </form>
+                                </a>
+
+
+                                <form
+                                    action="{{ url_for('eliminar_producto', id=producto[0]) }}"
+                                    method="POST">
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-delete"
+                                        onclick="return confirm('¿Está seguro de eliminar este producto?');">
+
+                                        <i class="bi bi-trash3 me-1"></i>
+                                        Eliminar
+
+                                    </button>
+
+                                </form>
+
+                            </div>
 
                         </td>
 
@@ -202,8 +325,21 @@ Productos - IMPORDYCOM S.A.
 
                     <tr>
 
-                        <td colspan="7" class="text-center">
-                            No hay productos registrados todavía.
+                        <td
+                            colspan="7"
+                            class="empty-table">
+
+                            <i class="bi bi-box-seam"></i>
+
+                            <h5>
+                                No hay productos registrados
+                            </h5>
+
+                            <p>
+                                Agregue un producto para comenzar a gestionar
+                                el catálogo.
+                            </p>
+
                         </td>
 
                     </tr>
@@ -215,6 +351,8 @@ Productos - IMPORDYCOM S.A.
         </table>
 
     </div>
+
+</div>
 
 </section>
 

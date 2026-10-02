@@ -1,61 +1,140 @@
 {% extends "base.html" %}
 
+{% block title %}
+Crear cuenta - IMPORDYCOM S.A.
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<section class="auth-section">
 
-            <div class="card shadow">
-                <div class="card-body">
+    <div class="auth-card">
 
-                    <h2 class="text-center mb-4">
-                        Crear cuenta
-                    </h2>
+        <div class="auth-header">
 
-                    {% if error %}
-                        <div class="alert alert-danger">
-                            {{ error }}
-                        </div>
-                    {% endif %}
-
-                    <form method="POST">
-
-                        {{ form.hidden_tag() }}
-
-                        <div class="mb-3">
-                            {{ form.usuario.label(class="form-label") }}
-                            {{ form.usuario(class="form-control") }}
-
-                            {% for error in form.usuario.errors %}
-                                <div class="text-danger small">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="mb-3">
-                            {{ form.password.label(class="form-label") }}
-                            {{ form.password(class="form-control") }}
-
-                            {% for error in form.password.errors %}
-                                <div class="text-danger small">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="d-grid">
-                            {{ form.submit(class="btn btn-primary") }}
-                        </div>
-
-                    </form>
-
-                </div>
+            <div class="auth-icon">
+                <i class="bi bi-person-plus"></i>
             </div>
 
+            <span class="section-kicker">
+                ACCESO AL SISTEMA
+            </span>
+
+            <h2>
+                Crear cuenta
+            </h2>
+
+            <p>
+                Registre un usuario para acceder al sistema administrativo.
+            </p>
+
         </div>
+
+
+        {% if error %}
+
+            <div class="auth-alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <span>
+                    {{ error }}
+                </span>
+
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+
+            <!-- USUARIO -->
+
+            <div class="auth-field">
+
+                {{ form.usuario.label(class="form-label") }}
+
+                <div class="auth-input">
+
+                    <i class="bi bi-person"></i>
+
+                    {{ form.usuario(
+                        class="form-control",
+                        placeholder="Ingrese un nombre de usuario"
+                    ) }}
+
+                </div>
+
+                {% for error in form.usuario.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="auth-field">
+
+                {{ form.password.label(class="form-label") }}
+
+                <div class="auth-input">
+
+                    <i class="bi bi-lock"></i>
+
+                    {{ form.password(
+                        class="form-control",
+                        placeholder="Ingrese una contraseña"
+                    ) }}
+
+                </div>
+
+                {% for error in form.password.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- BOTÓN -->
+
+            <div class="auth-submit">
+
+                {{ form.submit(
+                    class="btn btn-primary"
+                ) }}
+
+            </div>
+
+        </form>
+
+
+        <div class="auth-register">
+
+            <span>
+                ¿Ya tienes una cuenta?
+            </span>
+
+            <a href="{{ url_for('login') }}">
+                Iniciar sesión
+            </a>
+
+        </div>
+
     </div>
-</div>
+
+</section>
 
 {% endblock %}

@@ -6,162 +6,200 @@ Editar factura - IMPORDYCOM S.A.
 
 {% block content %}
 
-<section class="my-5">
+<section class="admin-section form-page-section invoice-edit-section">
 
-```
-<div class="container">
+    <div class="form-page-header">
 
-    <div class="row justify-content-center">
+        <div>
 
-        <div class="col-lg-7">
+            <span class="section-kicker">
+                FACTURACIÓN
+            </span>
 
-            <!-- ENCABEZADO -->
+            <h2>
+                Editar factura
+            </h2>
 
-            <div class="mb-4">
+            <p>
+                Modifique los datos de la factura seleccionada.
+            </p>
 
-                <h2 class="mb-1">
-                    Editar factura
-                </h2>
+        </div>
 
-                <p class="text-muted mb-0">
-                    Modifique los datos de la factura seleccionada.
-                </p>
+        <div class="form-page-icon invoice-form-icon">
+            <i class="bi bi-pencil-square"></i>
+        </div>
+
+    </div>
+
+
+    <div class="form-card-modern">
+
+        {% if error %}
+
+            <div class="invoice-form-alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <div>
+                    <strong>No se pudo actualizar la factura</strong>
+
+                    <p>
+                        {{ error }}
+                    </p>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+
+            <!-- CLIENTE -->
+
+            <div class="form-modern-group">
+
+                {{ form.cliente.label(class="form-label") }}
+
+                <div class="input-group-modern">
+
+                    <span class="input-group-icon">
+                        <i class="bi bi-person"></i>
+                    </span>
+
+                    {{ form.cliente(
+                        class="form-select"
+                    ) }}
+
+                </div>
+
+                {% for error in form.cliente.errors %}
+
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
 
             </div>
 
 
-            <!-- FORMULARIO -->
+            <!-- PRODUCTO -->
 
-            <div class="card shadow">
+            <div class="form-modern-group">
 
-                <div class="card-body p-4">
+                {{ form.producto.label(class="form-label") }}
 
-                    {% if error %}
+                <div class="input-group-modern">
 
-                        <div class="alert alert-danger">
-                            {{ error }}
-                        </div>
+                    <span class="input-group-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </span>
 
-                    {% endif %}
+                    {{ form.producto(
+                        class="form-select"
+                    ) }}
 
+                </div>
 
-                    <form method="POST">
+                {% for error in form.producto.errors %}
 
-                        {{ form.hidden_tag() }}
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
 
+                {% endfor %}
 
-                        <!-- CLIENTE -->
-
-                        <div class="mb-3">
-
-                            {{ form.cliente.label(class="form-label") }}
-
-                            {{ form.cliente(
-                                class="form-select"
-                            ) }}
-
-                            {% for error in form.cliente.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+            </div>
 
 
-                        <!-- PRODUCTO -->
+            <!-- CANTIDAD -->
 
-                        <div class="mb-3">
+            <div class="form-modern-group">
 
-                            {{ form.producto.label(class="form-label") }}
+                {{ form.cantidad.label(class="form-label") }}
 
-                            {{ form.producto(
-                                class="form-select"
-                            ) }}
+                <div class="input-group-modern">
 
-                            {% for error in form.producto.errors %}
+                    <span class="input-group-icon">
+                        <i class="bi bi-123"></i>
+                    </span>
 
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
+                    {{ form.cantidad(
+                        class="form-control",
+                        min="1"
+                    ) }}
 
-                            {% endfor %}
+                </div>
 
-                        </div>
+                {% for error in form.cantidad.errors %}
 
+                    <div class="form-error">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        {{ error }}
+                    </div>
 
-                        <!-- CANTIDAD -->
+                {% endfor %}
 
-                        <div class="mb-4">
-
-                            {{ form.cantidad.label(class="form-label") }}
-
-                            {{ form.cantidad(
-                                class="form-control",
-                                min="1"
-                            ) }}
-
-                            {% for error in form.cantidad.errors %}
-
-                                <div class="text-danger small mt-1">
-                                    {{ error }}
-                                </div>
-
-                            {% endfor %}
-
-                        </div>
+            </div>
 
 
-                        <!-- INFORMACIÓN -->
+            <!-- INFORMACIÓN -->
 
-                        <div class="alert alert-info">
+            <div class="invoice-edit-info">
 
-                            <strong>Importante:</strong>
+                <div class="invoice-edit-info-icon">
+                    <i class="bi bi-info-circle"></i>
+                </div>
 
-                            Al modificar la factura, el sistema
-                            actualizará automáticamente el stock
-                            del producto seleccionado.
+                <div>
 
-                        </div>
+                    <strong>
+                        Actualización de inventario
+                    </strong>
 
-
-                        <!-- BOTONES -->
-
-                        <div class="d-flex justify-content-between mt-4">
-
-                            <a
-                                href="{{ url_for('facturacion') }}"
-                                class="btn btn-secondary">
-
-                                Cancelar
-
-                            </a>
-
-
-                            <button
-                                type="submit"
-                                class="btn btn-success">
-
-                                Guardar cambios
-
-                            </button>
-
-                        </div>
-
-                    </form>
+                    <p>
+                        Al modificar la factura, el sistema
+                        actualizará automáticamente el stock
+                        del producto seleccionado.
+                    </p>
 
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- BOTONES -->
+
+            <div class="form-actions-modern">
+
+                <a
+                    href="{{ url_for('facturacion') }}"
+                    class="btn btn-outline-secondary form-cancel-btn">
+
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Cancelar
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary form-submit-btn">
+
+                    <i class="bi bi-check2-circle me-2"></i>
+                    Guardar cambios
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
-
-</div>
-```
 
 </section>
 

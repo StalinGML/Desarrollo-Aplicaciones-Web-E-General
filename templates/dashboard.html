@@ -1,29 +1,206 @@
 {% extends "base.html" %}
 
+{% block title %}
+Panel de administración - IMPORDYCOM S.A.
+{% endblock %}
+
 {% block content %}
 
-<div class="container mt-5">
+<section class="admin-section dashboard-section">
 
-    <div class="card shadow">
-        <div class="card-body text-center">
+    <!-- ENCABEZADO -->
+    <div class="dashboard-hero">
 
-            <h1 class="mb-3">
-                Bienvenido
+        <div class="dashboard-hero-content">
+
+            <span class="section-kicker">
+                PANEL DE ADMINISTRACIÓN
+            </span>
+
+            <h1>
+                Bienvenido,
+                <span>{{ current_user.usuario }}</span>
             </h1>
 
-            <p class="lead">
-                Has iniciado sesión como:
-                <strong>{{ current_user.usuario }}</strong>
-            </p>
-
-            <p class="mb-4">
-                Puedes utilizar el menú de navegación para acceder
-                a las diferentes funcionalidades del sistema.
+            <p>
+                Has iniciado sesión correctamente en el sistema
+                administrativo de IMPORDYCOM S.A.
             </p>
 
         </div>
+
+        <div class="dashboard-hero-icon">
+            <i class="bi bi-person-check"></i>
+        </div>
+
     </div>
 
-</div>
+
+    <!-- ACCESOS RÁPIDOS -->
+
+    <div class="dashboard-section-heading">
+
+        <div>
+            <h3>
+                Accesos rápidos
+            </h3>
+
+            <p>
+                Seleccione una opción para administrar la información
+                del sistema.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- PRODUCTOS -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <a
+                href="{{ url_for('productos') }}"
+                class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+
+                <h4>
+                    Productos
+                </h4>
+
+                <p>
+                    Administre productos, precios, stock y proveedores.
+                </p>
+
+                <span class="dashboard-card-link">
+                    Administrar
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- CLIENTES -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <a
+                href="{{ url_for('clientes') }}"
+                class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h4>
+                    Clientes
+                </h4>
+
+                <p>
+                    Registre y consulte la información de los clientes.
+                </p>
+
+                <span class="dashboard-card-link">
+                    Administrar
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- PROVEEDORES -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <a
+                href="{{ url_for('proveedores') }}"
+                class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    <i class="bi bi-truck"></i>
+                </div>
+
+                <h4>
+                    Proveedores
+                </h4>
+
+                <p>
+                    Gestione proveedores y sus datos de contacto.
+                </p>
+
+                <span class="dashboard-card-link">
+                    Administrar
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- FACTURACIÓN -->
+
+        <div class="col-md-6 col-xl-3">
+
+            <a
+                href="{{ url_for('facturacion') }}"
+                class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <h4>
+                    Facturación
+                </h4>
+
+                <p>
+                    Registre, consulte y gestione las facturas.
+                </p>
+
+                <span class="dashboard-card-link">
+                    Administrar
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMACIÓN -->
+
+    <div class="dashboard-info">
+
+        <div class="dashboard-info-icon">
+            <i class="bi bi-info-circle"></i>
+        </div>
+
+        <div>
+
+            <strong>
+                Panel administrativo
+            </strong>
+
+            <p>
+                Utilice los accesos disponibles para gestionar
+                la información de IMPORDYCOM S.A.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}
